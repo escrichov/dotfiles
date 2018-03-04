@@ -27,3 +27,9 @@ Configure aws credentials:
 ```
 aws configure
 ```
+
+Update system:
+
+```
+update
+```

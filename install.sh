@@ -119,6 +119,7 @@ fi
     else
         print_step "Updating Brew"
         brew update
+        brew upgrade
     fi
 )
 
