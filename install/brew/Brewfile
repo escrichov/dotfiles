@@ -76,9 +76,10 @@ cask 'macdown'
 cask 'plex-media-server'
 cask 'maintenance'
 cask 'basecamp'
-cask 'imageoptim'
-cask 'imagealpha'
-cask 'mactex'
+cask 'imageoptim' # Optimize jpeg images
+cask 'imagealpha' # Optimize png images
+cask 'mactex' # LaTeX for Mac
+cask 'spectacle' # Window management
 
 mas 'Xcode', id: 497799835
 mas 'Pages', id: 409201541
