@@ -1,0 +1,83 @@
+# =======================================
+# Include a machine specific .gitconfig
+# This requires Git v1.7.10 or later
+# =======================================
+
+# =======================================
+# Standard configuration
+# =======================================
+[include]
+        path = ~/.gitconfig.credentials
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+	ui = true
+
+[merge]
+    summary = true
+    tool = vimdiff
+
+[core]
+    excludesfile = ~/.gitignore
+    quotepath = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+[push]
+	default = simple
+
+[web]
+    browser = ch
+
+[browser "ch"]
+    cmd = "open -a \"/Applications/Google Chrome.app\""
+
+# https://github.com/so-fancy/diff-so-fancy
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[alias]
+	# Status alias
+	s = status -sb
+
+	# Log alias
+	ls 	  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	last  = log -1 HEAD
+    today = log --since=midnight --color --graph \
+				--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+            	--abbrev-commit
+	yesterday = log --since yesterday --until=midnight --color --graph \
+	        		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+	        		--abbrev-commit
+	history = log --graph --pretty=format:'%C(yellow)%h%Creset \
+			  	  -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' \
+	          	  --abbrev-commit --date=short --date-order -n30
+	ll = log --stat --abbrev-commit
+	
+    # Branch alias
+	unstage = reset HEAD --
+	discard = checkout --
+	remotes  = remote -v
+	branches = branch -a
+	tags     = tag -l
+	p  		 = push
+	sync     = !git pull && git push
+
+	# Commit aias
+	amend = commit --amend
+	cm    = commit -m
+	c     = commit
+	ca	  = !git add -A && git commit
