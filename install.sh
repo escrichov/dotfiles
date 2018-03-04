@@ -149,6 +149,7 @@ fi
 (
     print_step "Installing source files to ZSH"
     grep -q -F "source $DOTFILES_DIR/env_all.sh" $BASHRC || echo "source $DOTFILES_DIR/env_all.sh" >> $BASHRC
+    source $BASHRC
 )
 
 # Install fzf autocompletion
@@ -200,6 +201,11 @@ fi
     /usr/bin/python setup-login-items.py
 )
 
+# Restore configuration of apps
+print_step "Restore apps configuration and preferences"
+restore-conf
+
+# Revert sudo timeout
 print_step "Revert unlimited sudo timeout"
 reset_sudo_timeout
 
