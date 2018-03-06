@@ -51,6 +51,7 @@ brew 'tldr'
 brew 'diff-so-fancy'
 brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
+brew 'mediainfo' # View files formats
 
 cask 'google-chrome'
 cask 'handbrake'
