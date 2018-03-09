@@ -34,6 +34,7 @@ packages=(
     nodemon
     yo
 	explain-command
+	imageoptim-cli
 )
 
 npm install -g "${packages[@]}"
