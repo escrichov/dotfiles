@@ -28,6 +28,12 @@ Configure aws credentials:
 aws configure
 ```
 
+Backup configuration:
+
+```
+backup-conf
+```
+
 Update system:
 
 ```
