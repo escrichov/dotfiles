@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
 
-# Update App Store apps
+# Update Mac OS X
 sudo softwareupdate -i -a
+
+# Update App Store apps
+mas upgrade
 
 # Update Homebrew (Cask) & packages
 brew update
