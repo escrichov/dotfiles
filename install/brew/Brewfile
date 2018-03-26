@@ -53,9 +53,10 @@ brew 'diff-so-fancy'
 brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
-brew 'soundflower'
+brew 'soundflower' # 
 brew 'soundflowerbed'
 brew 'logitech-options'
+brew 'flowsync' # Polar watch
 
 cask 'google-chrome'
 cask 'handbrake'
