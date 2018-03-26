@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-DIR=`dirname $0`
+DIR=$(cd `dirname $0` && pwd)
 BINARIES_DIR=$DIR/bin
 FUNCTIONS_DIR=$DIR/functions
 ENVIRONMENT_DIR=$DIR/environment
