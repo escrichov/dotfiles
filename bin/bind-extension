@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+APP=$1
+EXTENSION=$2
+
+function usage {
+    echo "Usage: $0 [app] [extension]"
+    echo "Example: MacDown .md"
+    exit 1
+}
+
+[ -z "$APP" ] && usage
+[ -z "$EXTENSION" ] && usage
+
+
+BUNDLE_ID=$(osascript -e "id of app \"$APP\"")
+RETURN_CODE=$?
+
+if [ "$RETURN_CODE" = "1" ]; then
+    echo "App $APP not found"
+    exit $RETURN_CODE
+fi
+
+duti -s $BUNDLE_ID $EXTENSION all

@@ -157,9 +157,6 @@ fi
         print_step $COLOUR "Installing OH MY ZSH"
         sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     fi
-
-    # Change default shell to zsh
-    chsh -s $(which zsh)
 )
 
 # Install profile sources in ZSH
@@ -216,11 +213,14 @@ fi
 
     print_step "Default login items"
     /usr/bin/python setup-login-items.py
+
+    print_step "Bind file extensions to apps"
+    /usr/bin/python file-extensions.py
 )
 
 # Restore configuration of apps
 print_step "Restore apps configuration and preferences"
-restore-conf
+mackup restore -f
 
 # Revert sudo timeout
 print_step "Revert unlimited sudo timeout"
