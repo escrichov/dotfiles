@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'caskroom/drivers' # Logitech options
 
 brew 'coreutils'
 brew 'go'
@@ -52,6 +53,9 @@ brew 'diff-so-fancy'
 brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
+brew 'soundflower'
+brew 'soundflowerbed'
+brew 'logitech-options'
 
 cask 'google-chrome'
 cask 'handbrake'
