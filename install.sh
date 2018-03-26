@@ -4,6 +4,7 @@
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 INSTALL_DIR=$DOTFILES_DIR/install
 CONFIG_FILE=$DOTFILES_DIR/config.sh
+ALL_ENVIRONMENT_FILE=$DOTFILES_DIR/env_all.sh
 
 GIT_CONFIG_CREDENTIALS_FILE=$DOTFILES_DIR/dots/.gitconfig.credentials
 GIT_CONFIG_CRENDENTIAL_METHOD=osxkeychain
@@ -14,6 +15,7 @@ OHMYZSHDIRECTORY=$HOME/.oh-my-zsh
 TITLE_MESSAGE="Escrichov Dotfiles"
 COLOUR_STEP=green
 COLOUR_TITLE=yellow
+COLOUR_VARIABLE=yellow
 
 SUDO_TIMEOUT_TEMPORARY_FILE=/tmp/temporal_sudo_timeout
 SUDO_TIMEOUT_FILE=/etc/sudoers.d/temporal_sudo_timeout
@@ -33,6 +35,11 @@ function _term() {
 function print_title ()
 {
     echo-colour $COLOUR_TITLE "$TITLE_MESSAGE"
+}
+
+function print_variable ()
+{
+    echo-colour $COLOUR_VARIABLE "$1: $2"
 }
 
 function print_step ()
@@ -64,6 +71,9 @@ function reset_sudo_timeout ()
     sudo -K
 }
 
+
+# Source all environment
+source $ALL_ENVIRONMENT_FILE
 
 # Catch signals to exit correctly
 trap _term_only_exit SIGTERM
@@ -105,15 +115,11 @@ else
     source $CONFIG_FILE
 fi
 
-# Install dotfiles
-(
-    print_step "Installing dotfiles"
-    stow --target=$HOME --dir=$DOTFILES_DIR dots
-)
-
 # Install or Update Brew
 (
-    if [ ! -f /usr/local/bin/brew ]; then
+    BREW_BIN=$BREW_PATH/bin/brew
+
+    if [ ! -f $BREW_BIN ]; then
         print_step "Installing Brew"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
@@ -123,12 +129,20 @@ fi
     fi
 )
 
+# Install dotfiles
+(
+    print_step "Installing dotfiles"
+    stow --target=$HOME --dir=$DOTFILES_DIR dots
+)
+
 # Install Brew packages
 (
     cd $INSTALL_DIR/brew
     print_step "Installing Brew packages and applications"
     brew bundle
 )
+
+
 
 # Install npm packages
 (
@@ -143,6 +157,9 @@ fi
         print_step $COLOUR "Installing OH MY ZSH"
         sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     fi
+
+    # Change default shell to zsh
+    chsh -s $(which zsh)
 )
 
 # Install profile sources in ZSH
