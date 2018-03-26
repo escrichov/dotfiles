@@ -52,6 +52,7 @@ brew 'diff-so-fancy'
 brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
+brew 'duti' # Change defaults apps for file extensions
 
 cask 'google-chrome'
 cask 'handbrake'
@@ -82,6 +83,8 @@ cask 'imageoptim' # Optimize jpeg images
 cask 'imagealpha' # Optimize png images
 cask 'mactex' # LaTeX for Mac
 cask 'spectacle' # Window management
+cask 'keybase'
+cask 'docker-toolbox'
 
 mas 'Xcode', id: 497799835
 mas 'Pages', id: 409201541
@@ -89,7 +92,7 @@ mas 'Keynote', id: 409183694
 mas 'Numbers', id: 409203825
 mas 'iMovie', id: 408981434
 mas 'Pocket', id: 568494494
-#mas 'Pixelmator', id: 407963104 
+#mas 'Pixelmator', id: 407963104
 mas 'Microsoft OneNote', id: 784801555
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
