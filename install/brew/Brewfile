@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'caskroom/cask'
 tap 'caskroom/drivers' # Logitech options
 
 brew 'coreutils'
@@ -54,10 +55,6 @@ brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
 brew 'duti' # Change defaults apps for file extensions
-brew 'soundflower'
-brew 'soundflowerbed'
-brew 'logitech-options'
-brew 'flowsync' # Polar watch
 
 cask 'google-chrome'
 cask 'handbrake'
@@ -90,6 +87,10 @@ cask 'mactex' # LaTeX for Mac
 cask 'spectacle' # Window management
 cask 'keybase'
 cask 'docker-toolbox'
+cask 'soundflower'
+cask 'soundflowerbed'
+cask 'logitech-options'
+cask 'flowsync' # Polar watch
 
 mas 'Xcode', id: 497799835
 mas 'Pages', id: 409201541
