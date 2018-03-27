@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# DOTFILES DIRECTORY
+FILENAME=$_
+export DOTFILES_DIR=$( dirname $(dirname $FILENAME))
 
 # PATH AND ENVIRONMENT VARIABLES
 export LC_ALL=en_US.UTF-8
@@ -27,7 +30,7 @@ export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 
 # EDITOR
-export EDITOR="$BREW_PATH -w"
+export EDITOR="$BREW_PATH/bin/mate -w"
 
 # Add Keys to SSH Agent
 ssh-add -K ~/.ssh/id_rsa &> /dev/null
