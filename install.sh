@@ -142,13 +142,18 @@ fi
     brew bundle
 )
 
-
-
 # Install npm packages
 (
     cd $INSTALL_DIR/node
     print_step "Installing NPM Packages"
     ./npm.sh
+)
+
+# Install ruby packages
+(
+    cd $INSTALL_DIR/ruby
+    print_step "Installing Ruby Gem Packages"
+    ./gems.sh
 )
 
 # Install Oh my ZSH
