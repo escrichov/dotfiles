@@ -13,7 +13,7 @@ CONFIG_FILE=$DIR/config.sh
 # Source environment variables
 source $ENVIRONMENT_DIR/env.sh
 if [ -f $ENVIRONMENT_DIR/env_secret.sh ]; then
-	source $ENVIRONMENT_DIRk/env_secret.sh
+	source $ENVIRONMENT_DIR/env_secret.sh
 fi
 
 # Source all shell functions
