@@ -91,6 +91,7 @@ cask 'soundflower'
 cask 'soundflowerbed'
 cask 'logitech-options'
 cask 'flowsync' # Polar watch
+cask 'logitech-gaming-software' # Logitech keyboard
 
 mas 'Xcode', id: 497799835
 mas 'Pages', id: 409201541
