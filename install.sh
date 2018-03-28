@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-INSTALL_DIR=$DOTFILES_DIR/install
-CONFIG_FILE=$DOTFILES_DIR/config.sh
-ALL_ENVIRONMENT_FILE=$DOTFILES_DIR/env_all.sh
+DOTFILES_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+INSTALL_DIR=$DOTFILES_DIRECTORY/install
+CONFIG_FILE=$DOTFILES_DIRECTORY/config.sh
+ALL_ENVIRONMENT_FILE=$DOTFILES_DIRECTORY/env_all.sh
 
-GIT_CONFIG_CREDENTIALS_FILE=$DOTFILES_DIR/dots/.gitconfig.credentials
+GIT_CONFIG_CREDENTIALS_FILE=$DOTFILES_DIRECTORY/dots/.gitconfig.credentials
 GIT_CONFIG_CRENDENTIAL_METHOD=osxkeychain
 
 BASHRC=~/.zshrc
@@ -132,7 +132,7 @@ fi
 # Install dotfiles
 (
     print_step "Installing dotfiles"
-    stow --target=$HOME --dir=$DOTFILES_DIR dots
+    stow --target=$HOME --dir=$DOTFILES_DIRECTORY dots
 )
 
 # Install Brew packages
@@ -167,7 +167,7 @@ fi
 # Install profile sources in ZSH
 (
     print_step "Installing source files to ZSH"
-    grep -q -F "source $DOTFILES_DIR/env_all.sh" $BASHRC || echo "source $DOTFILES_DIR/env_all.sh" >> $BASHRC
+    grep -q -F "source $DOTFILES_DIRECTORY/env_all.sh" $BASHRC || echo "source $DOTFILES_DIRECTORY/env_all.sh" >> $BASHRC
     source $BASHRC
 )
 
@@ -192,7 +192,7 @@ fi
     fi
 )
 
-# Configure git name, email and credentials method
+# Configure git name, email and credentials method
 (
     print_step "Configure git name and email"
     touch $GIT_CONFIG_CREDENTIALS_FILE
