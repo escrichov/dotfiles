@@ -13,6 +13,8 @@ import sys
 loginItems = [
     '{path: "/Applications/Dropbox.app", hidden:false}',
     '{path: "/Applications/Spectacle.app", hidden:false}',
+    '{path: "/Applications/Logitech/Logitech Gaming Software.app", hidden:false}',
+    '{path: "/Applications/SoundflowerBed.app", hidden:false}',
 ]
 
 
