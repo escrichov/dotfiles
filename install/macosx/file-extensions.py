@@ -57,6 +57,9 @@ app_extensions = [
     ("Unarchiver", ".gz"),
     ("Unarchiver", ".7z"),
 
+    ("calibre", ".epub"),
+    ("calibre", ".mobi"),
+
     ("Unrarx", ".rar"),
 ]
 
