@@ -4,7 +4,9 @@ tap 'homebrew/bundle'
 tap 'caskroom/cask'
 tap 'caskroom/drivers' # Logitech options
 
+brew 'libxml2' # for nokogiri
 brew 'coreutils'
+brew 'sqlite3'
 brew 'go'
 brew 'govendor'
 brew 'openssl'
