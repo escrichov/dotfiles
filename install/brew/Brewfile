@@ -57,6 +57,7 @@ brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
 brew 'duti' # Change defaults apps for file extensions
+brew 'progress' # Progress for cp, tar, dd, ...
 
 cask 'google-chrome'
 cask 'handbrake'
