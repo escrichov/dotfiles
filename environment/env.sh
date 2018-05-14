@@ -8,6 +8,9 @@ export DOTFILES_DIR=$( dirname $(dirname $FILENAME))
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# EDITOR
+export EDITOR="$BREW_PATH/bin/mate -w"
+
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 
@@ -28,9 +31,6 @@ export PATH=$PATH:$GOPATH/bin
 
 # Java HOME
 export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
-
-# EDITOR
-export EDITOR="$BREW_PATH/bin/mate -w"
 
 # Add Keys to SSH Agent
 ssh-add -K ~/.ssh/id_rsa &> /dev/null

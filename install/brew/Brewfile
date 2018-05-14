@@ -58,6 +58,7 @@ brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
 brew 'duti' # Change defaults apps for file extensions
 brew 'progress' # Progress for cp, tar, dd, ...
+brew 'ssh-copy-id' # For copy ssh public keys to servers
 
 cask 'google-chrome'
 cask 'handbrake'
