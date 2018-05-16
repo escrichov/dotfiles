@@ -26,7 +26,7 @@ export PATH=$PATH:$BREW_PATH/texbin
 
 # Golang environment
 export PATH=$PATH:$BREW_PATH/go/bin
-export GOPATH=$HOME/golang
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # Java HOME
