@@ -92,11 +92,11 @@ cask 'mactex' # LaTeX for Mac
 cask 'spectacle' # Window management
 cask 'keybase'
 cask 'docker-toolbox'
-cask 'soundflower' # Control monitor speakers
-cask 'soundflowerbed' # Control monitor speakers
 cask 'logitech-options' # Logitech Mx Master
 cask 'flowsync' # Polar watch
-cask 'logitech-gaming-software' # Logitech keyboard
+#cask 'logitech-gaming-software' # Logitech keyboard
+#cask 'soundflower' # Control monitor speakers
+#cask 'soundflowerbed' # Control monitor speakers
 
 mas 'Xcode', id: 497799835
 mas 'Pages', id: 409201541
