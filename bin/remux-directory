@@ -1,0 +1,93 @@
+#!/usr/bin/python
+
+import os
+import sys
+from subprocess import call
+
+
+FILE_EXTENSIONS = ['mkv', 'avi', 'm4v', 'flv', 'mpeg', 'mpg', 'mp4']
+
+
+def usage():
+    print("Usage: {program} directory output_extension".format(program=sys.argv[0]))
+    print("Allowed file extensions: {}".format(FILE_EXTENSIONS))
+    sys.exit(1)
+
+
+def list_files_in_directory(directory):
+    files = []
+    for fname in os.listdir(directory):
+        path = os.path.join(directory, fname)
+        if not os.path.isdir(path):
+            files.append(path)
+
+    return files
+
+
+def get_file_extension(path):
+    _, file_extension = os.path.splitext(path)
+    file_extension = file_extension.replace(".", "")
+
+    return file_extension
+
+
+def change_file_extension(path, new_extension):
+    filename, _ = os.path.splitext(path)
+
+    return '{file}.{ext}'.format(file=filename, ext=new_extension)
+
+
+def filter_extensions(paths, extensions):
+    files = []
+    for path in paths:
+        file_extension = get_file_extension(path)
+        if file_extension in extensions:
+            files.append(path)
+
+    return files
+
+
+def remux(directory, src_extensions, dst_extension):
+
+    files = list_files_in_directory(directory)
+    files = filter_extensions(files, src_extensions)
+
+    if len(files) == 0:
+        print("No files matching extenstions {}".format(src_extensions))
+        sys.exit(1)
+
+    for f in files:
+        destination = change_file_extension(f, dst_extension)
+        print('Converting "{input}" to "{output}"'.format(
+            input=os.path.basename(f),
+            output=os.path.basename(destination),
+        ))
+        status = call([
+            "ffmpeg", "-y", "-fflags", "+genpts",
+            "-i", f,
+            "-c:v", "copy", "-c:a", "copy",
+            destination
+        ])
+        if status != 0:
+            print("FFMPEG Remux failed with status {status}".format(status=status))
+            sys.exit(1)
+
+
+if __name__ == "__main__":
+
+    if len(sys.argv) != 3:
+        usage()
+
+    directory = sys.argv[1]
+    extension_dest = sys.argv[2]
+
+    if extension_dest not in FILE_EXTENSIONS:
+        print("Incorrect file extension: {}".format(extension_dest))
+        print("Allowed file extensions: {}".format(FILE_EXTENSIONS))
+        sys.exit(1)
+
+    file_extensions = [f for f in FILE_EXTENSIONS if f != extension_dest]
+
+    remux(directory, file_extensions, extension_dest)
+
+    print("Done")
