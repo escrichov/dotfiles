@@ -127,6 +127,9 @@ fi
         brew update
         brew upgrade
     fi
+
+    # Disable analytics
+    brew analytics off
 )
 
 # Install dotfiles
@@ -204,6 +207,9 @@ fi
 # Configure MacOS X Preferences
 (
     cd $INSTALL_DIR/macosx
+    print_step "Setup DNS servers"
+    ./dns.sh
+
     print_step "Xcode command line developer tools"
     ./xcode.sh
 
