@@ -53,6 +53,7 @@ brew 'ipython'
 brew 'lolcat'
 brew 'tldr'
 brew 'diff-so-fancy'
+brew 'tmux'
 brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
@@ -89,11 +90,12 @@ cask 'basecamp'
 cask 'imageoptim' # Optimize jpeg images
 cask 'imagealpha' # Optimize png images
 cask 'mactex' # LaTeX for Mac
-cask 'spectacle' # Window management
 cask 'keybase'
+cask 'visual-studio-code'
 cask 'docker-toolbox'
 cask 'logitech-options' # Logitech Mx Master
 cask 'flowsync' # Polar watch
+#cask 'spectacle' # Window management
 #cask 'logitech-gaming-software' # Logitech keyboard
 #cask 'soundflower' # Control monitor speakers
 #cask 'soundflowerbed' # Control monitor speakers
@@ -108,3 +110,5 @@ mas 'Pocket', id: 568494494
 mas 'Microsoft OneNote', id: 784801555
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
+mas 'Magnet', id: 441258766
+
