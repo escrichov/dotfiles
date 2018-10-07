@@ -1,3 +1,5 @@
 config.sh
 environment/env_secret.sh
+
 dots/.gitconfig.credentials
+dots/.ssh/id_rsa*
