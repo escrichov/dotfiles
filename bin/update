@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # Update Mac OS X
 sudo softwareupdate -i -a
 
@@ -10,6 +9,10 @@ mas upgrade
 # Update Homebrew (Cask) & packages
 brew update
 brew upgrade
+
+# Update pip & virtualenv
+gpip2 install --upgrade pip virtualenv
+gpip3 install --upgrade pip virtualenv
 
 # Update npm & packages
 npm install npm -g
