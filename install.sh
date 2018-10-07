@@ -121,7 +121,7 @@ fi
 
     if [ ! -f $BREW_BIN ]; then
         print_step "Installing Brew"
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
     else
         print_step "Updating Brew"
         brew update
@@ -132,17 +132,17 @@ fi
     brew analytics off
 )
 
-# Install dotfiles
-(
-    print_step "Installing dotfiles"
-    stow --target=$HOME --dir=$DOTFILES_DIRECTORY dots
-)
-
 # Install Brew packages
 (
     cd $INSTALL_DIR/brew
     print_step "Installing Brew packages and applications"
     brew bundle
+)
+
+# Install dotfiles
+(
+    print_step "Installing dotfiles"
+    stow --target=$HOME --dir=$DOTFILES_DIRECTORY dots
 )
 
 # Install npm packages
@@ -185,6 +185,13 @@ fi
     print_step "Installing python pip"
     brew postinstall python2
     brew postinstall python3
+)
+
+# Install python virtualenv
+(
+    print_step "Installing python virtualenv"
+    gpip2 install virtualenv
+    gpip3 install virtualenv
 )
 
 # Generate new id_rsa only if not exists
