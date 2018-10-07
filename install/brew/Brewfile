@@ -4,6 +4,8 @@ tap 'homebrew/bundle'
 tap 'caskroom/cask'
 tap 'caskroom/drivers' # Logitech options
 
+# Libraries & Utilities
+brew 'stow' # for nokogiri
 brew 'libxml2' # for nokogiri
 brew 'coreutils'
 brew 'sqlite3'
@@ -54,6 +56,7 @@ brew 'lolcat'
 brew 'tldr'
 brew 'diff-so-fancy'
 brew 'tmux'
+brew 'dockutil' # For installing dock preferences
 brew 'mackup' # Backup application preferences
 brew 'htop' # View processes cpu, ram, ...
 brew 'mediainfo' # View files formats
@@ -61,6 +64,7 @@ brew 'duti' # Change defaults apps for file extensions
 brew 'progress' # Progress for cp, tar, dd, ...
 brew 'ssh-copy-id' # For copy ssh public keys to servers
 
+# Applications
 cask 'google-chrome'
 cask 'handbrake'
 cask 'slack'
@@ -74,7 +78,6 @@ cask 'dropbox'
 cask 'iterm2'
 cask 'intellij-idea'
 cask 'kitematic'
-cask 'unrarx'
 cask 'spotify'
 cask 'musixmatch'
 cask 'superduper'
@@ -95,11 +98,13 @@ cask 'visual-studio-code'
 cask 'docker-toolbox'
 cask 'logitech-options' # Logitech Mx Master
 cask 'flowsync' # Polar watch
+#cask 'unrarx'
 #cask 'spectacle' # Window management
 #cask 'logitech-gaming-software' # Logitech keyboard
 #cask 'soundflower' # Control monitor speakers
 #cask 'soundflowerbed' # Control monitor speakers
 
+# Mac App Store Applications
 mas 'Xcode', id: 497799835
 mas 'Pages', id: 409201541
 mas 'Keynote', id: 409183694
@@ -111,4 +116,3 @@ mas 'Microsoft OneNote', id: 784801555
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
-
