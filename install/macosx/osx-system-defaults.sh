@@ -38,16 +38,16 @@ fi
 # ==============================================
 
 # Enable ALF
-defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+defaults write com.apple.alf globalstate -int 1
 
 # Allow signed apps
-defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool true
+defaults write com.apple.alf allowsignedenabled -bool true
 
 # Enable logging
-defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
+defaults write com.apple.alf loggingenabled -bool true
 
 # Disable stealth mode
-defaults write /Library/Preferences/com.apple.alf stealthenabled -bool false
+defaults write com.apple.alf stealthenabled -bool false
 
 
 # ==============================================
@@ -55,11 +55,11 @@ defaults write /Library/Preferences/com.apple.alf stealthenabled -bool false
 # ==============================================
 
 # Display -> Automatically adjust brightness
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool true
+defaults write com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool true
 
 # Keyboard -> Adjust keyboard brightness in low light
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
+defaults write com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
+defaults write com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
 
 
 # ==============================================
@@ -67,34 +67,34 @@ defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard
 # ==============================================
 
 # Display login window as: Name and password
-defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool false
+defaults write com.apple.loginwindow SHOWFULLNAME -bool false
 
 # Show shut down etc. buttons
-defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
+defaults write com.apple.loginwindow PowerOffDisabled -bool false
 
 # Don't show any password hints
-defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
+defaults write com.apple.loginwindow RetriesUntilHint -int 0
 
 # Don't allow fast user switching
-defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool false
+defaults write .GlobalPreferences MultipleSessionEnabled -bool false
 
 # Hide users with UID under 500
-defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -bool YES
+defaults write com.apple.loginwindow Hide500Users -bool YES
 
 
 # ==============================================
 # Set keyboard preferences
 # ==============================================
-defaults write /Library/Preferences/com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.Spanish-ISO"
-defaults write /Library/Preferences/com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 87 "KeyboardLayout Name" "Spanish - ISO"
-
 # Delete the default layouts (US)
-defaults delete /Library/Preferences/com.apple.HIToolbox AppleEnabledInputSources
+defaults delete com.apple.HIToolbox AppleEnabledInputSources
+
+defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.Spanish-ISO"
+defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 87 "KeyboardLayout Name" "Spanish - ISO"
 
 # Enable Spanish layout
-defaults write /Library/Preferences/com.apple.HIToolbox AppleEnabledInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 87; "KeyboardLayout Name" = "Spanish - ISO"; }'
-defaults write /Library/Preferences/com.apple.HIToolbox AppleInputSourceHistory -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 87; "KeyboardLayout Name" = "Spanish - ISO"; }'
-defaults write /Library/Preferences/com.apple.HIToolbox AppleSelectedInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 87; "KeyboardLayout Name" = "Spanish - ISO"; }'
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
+defaults write com.apple.HIToolbox AppleInputSourceHistory -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
+defaults write com.apple.HIToolbox AppleSelectedInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
 
 # Enable key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool FALSE
@@ -103,7 +103,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool FALSE
 defaults write NSGlobalDomain KeyRepeat -int 2
 
 # Set scroll direction
-defaults write /Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool false
+defaults write .GlobalPreferences com.apple.swipescrolldirection -bool false
 
 
 # ==============================================
@@ -111,7 +111,7 @@ defaults write /Library/Preferences/.GlobalPreferences com.apple.swipescrolldire
 # ==============================================
 
 # Don't offer new disks for backup
-defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 
 # ==============================================
