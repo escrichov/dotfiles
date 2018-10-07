@@ -21,6 +21,7 @@ from Foundation import CFPreferencesAppSynchronize
 # Standard Applications
 # =======================================
 appleApps = [
+    "/Applications/Launchpad.app",
     "/Applications/Mail.app",
     "/Applications/Calendar.app",
     ]
