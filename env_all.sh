@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-
-DIR=$(cd `dirname $0` && pwd)
+SCRIPT_DIR=${BASH_SOURCE[0]}
+if [ -z "$SCRIPT_DIR" ]; then
+	SCRIPT_DIR=$0
+fi
+DIR=$(cd `dirname $SCRIPT_DIR` && pwd)
 BINARIES_DIR=$DIR/bin
 FUNCTIONS_DIR=$DIR/functions
 ENVIRONMENT_DIR=$DIR/environment
