@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# DOTFILES DIRECTORY
+# DOTFILES DIRECTORY
 FILENAME=$_
 export DOTFILES_DIR=$( dirname $(dirname $FILENAME))
 

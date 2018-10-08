@@ -60,3 +60,28 @@ function man() {
 function reload() {
     source $DOTFILES_DIR/env_all.sh
 }
+
+function update() {
+	# Update Mac OS X
+	sudo softwareupdate -i -a
+
+	# Update App Store apps
+	mas upgrade
+
+	# Update Homebrew (Cask) & packages
+	brew update
+	brew upgrade
+
+	# Update pip & virtualenv
+	gpip2 install --upgrade pip virtualenv
+	gpip3 install --upgrade pip virtualenv
+
+	# Update npm & packages
+	npm install npm -g
+	npm update -g
+
+	# Update Ruby & gems
+	gem update —system
+	gem update
+
+}
