@@ -83,5 +83,4 @@ function update() {
 	# Update Ruby & gems
 	gem update —system
 	gem update
-
 }

@@ -63,6 +63,8 @@ brew 'mediainfo' # View files formats
 brew 'duti' # Change defaults apps for file extensions
 brew 'progress' # Progress for cp, tar, dd, ...
 brew 'ssh-copy-id' # For copy ssh public keys to servers
+brew 'zsh-syntax-highlighting' # ZSH Plugin for syntax highlighting
+brew 'zsh-autosuggestions' # ZSH Plugin for syntax autosuggestions
 
 # Applications
 cask 'google-chrome'

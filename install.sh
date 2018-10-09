@@ -17,18 +17,9 @@ COLOUR_STEP=green
 COLOUR_TITLE=yellow
 COLOUR_VARIABLE=yellow
 
-SUDO_TIMEOUT_TEMPORARY_FILE=/tmp/temporal_sudo_timeout
-SUDO_TIMEOUT_FILE=/etc/sudoers.d/temporal_sudo_timeout
-
-
-function _term_only_exit() {
-    exit 1
-}
 
 function _term() {
     echo-colour red "Installation script stopped"
-    echo-colour red "Revert unlimited sudo timeout"
-    reset_sudo_timeout
     exit 1
 }
 
@@ -53,31 +44,12 @@ function print_error ()
     _term
 }
 
-function unlimited_sudo_timeout ()
-{
-    sudo rm -f $SUDO_TIMEOUT_TEMPORARY_FILE
-    sudo echo "Defaults    timestamp_timeout=-1" > $SUDO_TIMEOUT_TEMPORARY_FILE
-    sudo chmod 440 $SUDO_TIMEOUT_TEMPORARY_FILE
-    sudo chown root $SUDO_TIMEOUT_TEMPORARY_FILE
-    sudo visudo -c -f $SUDO_TIMEOUT_TEMPORARY_FILE || print_error "Failed to set unlimited sudo timeout"
-    sudo mv $SUDO_TIMEOUT_TEMPORARY_FILE $SUDO_TIMEOUT_FILE
-}
-
-function reset_sudo_timeout ()
-{
-    sudo rm -f $SUDO_TIMEOUT_FILE
-    sudo rm -f $SUDO_TIMEOUT_TEMPORARY_FILE
-    # Force input password the next time
-    sudo -K
-}
-
-
 # Source all environment
 source $ALL_ENVIRONMENT_FILE
 
 # Catch signals to exit correctly
-trap _term_only_exit SIGTERM
-trap _term_only_exit INT
+trap _term SIGTERM
+trap _term INT
 
 # Print dotfiles title
 print_title
@@ -85,14 +57,6 @@ print_title
 # Ask for sudo only first
 print_step "Ask for sudo password only once"
 sudo -v # ask for sudo upfront
-
-# Set unlimited sudo timeout without touching /etc/sudoers file
-print_step "Set unlimited sudo timeout temporary"
-unlimited_sudo_timeout
-
-# Catch signals to exit correctly and revert sudo timeout
-trap _term SIGTERM
-trap _term INT
 
 # Create configuration file with Name, Email
 if [ ! -f "$CONFIG_FILE" ]
@@ -132,6 +96,17 @@ fi
     brew analytics off
 )
 
+# Configure MacOS X Preferences that required sudo permissions
+(
+    cd $INSTALL_DIR/macosx
+
+    print_step "Xcode command line developer tools"
+    ./xcode.sh
+
+    print_step "Installing system preferences"
+    sudo ./osx-system-defaults.sh
+)
+
 # Install Brew packages
 (
     cd $INSTALL_DIR/brew
@@ -165,6 +140,33 @@ fi
         print_step $COLOUR "Installing OH MY ZSH"
         sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     fi
+)
+
+# Install Powerline fonts
+(
+	print_step "Installing Powerline Fonts"
+
+	git clone https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+	cd /tmp/fonts
+	./install.sh
+	/bin/rm -rf /tmp/fonts
+)
+
+# Customize Oh my ZSH
+(
+    print_step "Customizing Oh my ZSH"
+	
+	# Set templace robbyrussell by agnoster
+	sed -i '' 's/ZSH_THEME=.*/ZSH_THEME="agnoster"/' $BASHRC
+
+	# Add Default user to hid user@host line in prompt
+	grep -q -F "DEFAULT_USER=$(whoami)" $BASHRC || echo "DEFAULT_USER=$(whoami)" >> $BASHRC
+	
+	# Installing Syntax Highlighting & Autosuggestions
+	ZSH_SYNTAX_HIGHLIGHTING_PATH=$BREW_PATH/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	grep -q -F "source $ZSH_SYNTAX_HIGHLIGHTING_PATH" $BASHRC || echo "source $ZSH_SYNTAX_HIGHLIGHTING_PATH" >> $BASHRC
+	ZSH_AUTOSUGGESTIONS_PATH=$BREW_PATH/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+	grep -q -F "source $ZSH_AUTOSUGGESTIONS_PATH" $BASHRC || echo "source $ZSH_AUTOSUGGESTIONS_PATH" >> $BASHRC	
 )
 
 # Install profile sources in ZSH
@@ -217,12 +219,6 @@ fi
     print_step "Setup DNS servers"
     ./dns.sh
 
-    print_step "Xcode command line developer tools"
-    ./xcode.sh
-
-    print_step "Installing system preferences"
-    sudo ./osx-system-defaults.sh
-
     print_step "Installing user preferences"
     ./osx-user-defaults.sh
 
@@ -239,9 +235,5 @@ fi
 # Restore configuration of apps
 print_step "Restore apps configuration and preferences"
 mackup restore -f
-
-# Revert sudo timeout
-print_step "Revert unlimited sudo timeout"
-reset_sudo_timeout
 
 exit 0
