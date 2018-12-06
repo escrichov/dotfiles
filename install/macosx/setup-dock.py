@@ -50,6 +50,11 @@ thirdPartyApps = [
     "forced": True
     },
     {
+    "path": "/Applications/Visual Studio Code.app",
+    "args": [],
+    "forced": True
+    },
+    {
     "path": "/Applications/iTerm.app",
     "args": [],
     "forced": True
