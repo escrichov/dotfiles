@@ -192,6 +192,7 @@ fi
 # Install python virtualenv
 (
     print_step "Installing python virtualenv"
+	gpip2 install pyobjc  		# For setup-dock https://stackoverflow.com/questions/1614648/importerror-no-module-named-foundation
     gpip2 install virtualenv
     gpip3 install virtualenv
 )
