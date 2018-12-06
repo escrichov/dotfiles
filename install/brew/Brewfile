@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'heroku/brew'
 tap 'caskroom/cask'
 tap 'caskroom/drivers' # Logitech options
 
@@ -25,7 +26,7 @@ brew 'elixir'
 brew 'erlang'
 brew 'ffmpeg'
 brew 'git'
-brew 'heroku'
+brew 'heroku/brew/heroku'
 brew 'httpie'
 brew 'nmap'
 brew 'mysql'
