@@ -101,6 +101,7 @@ cask 'visual-studio-code'
 cask 'docker-toolbox'
 cask 'logitech-options' # Logitech Mx Master
 cask 'flowsync' # Polar watch
+cask 'etcher' # Flash usb and SD Cards
 #cask 'unrarx'
 #cask 'spectacle' # Window management
 #cask 'logitech-gaming-software' # Logitech keyboard
