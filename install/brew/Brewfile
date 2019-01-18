@@ -102,6 +102,7 @@ cask 'docker-toolbox'
 cask 'logitech-options' # Logitech Mx Master
 cask 'flowsync' # Polar watch
 cask 'etcher' # Flash usb and SD Cards
+cask 'chromedriver'
 #cask 'unrarx'
 #cask 'spectacle' # Window management
 #cask 'logitech-gaming-software' # Logitech keyboard
