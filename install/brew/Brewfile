@@ -13,9 +13,8 @@ brew 'sqlite3'
 brew 'go' # Golang
 brew 'govendor'
 brew 'openssl'
-brew 'rbenv'
-brew 'ruby'
-brew 'ruby-build'
+brew 'rbenv' # Ruby installation
+brew 'ruby-build' # Ruby installation
 brew 'unrar'
 brew 'wget'
 brew 'youtube-dl'

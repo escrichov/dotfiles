@@ -21,6 +21,9 @@ export PATH=$BREW_PATH:$PATH
 # python2 to path
 export PATH=$PATH:$BREW_PATH/opt/python@2/bin
 
+# Ruby
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
 # MacText to path
 export PATH=$PATH:$BREW_PATH/texbin
 
