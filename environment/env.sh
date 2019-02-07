@@ -21,6 +21,9 @@ export PATH=$BREW_PATH:$PATH
 # python2 to path
 export PATH=$PATH:$BREW_PATH/opt/python@2/bin
 
+# Conda
+source /usr/local/anaconda3/etc/profile.d/conda.sh
+
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
