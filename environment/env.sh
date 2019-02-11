@@ -35,6 +35,9 @@ export PATH=$PATH:$BREW_PATH/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# Gettext
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+
 # Java HOME
 export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 

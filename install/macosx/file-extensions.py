@@ -60,6 +60,8 @@ app_extensions = [
 
     ("calibre", ".epub"),
     ("calibre", ".mobi"),
+
+    ("poedit", ".po"),
 ]
 
 
