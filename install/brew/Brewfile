@@ -105,6 +105,7 @@ cask 'chromedriver'
 cask 'anaconda'
 cask 'poedit'
 cask 'anki'
+cask 'docker'
 #cask 'unrarx'
 #cask 'spectacle' # Window management
 #cask 'logitech-gaming-software' # Logitech keyboard
