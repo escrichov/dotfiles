@@ -8,15 +8,15 @@ export DOTFILES_DIR=$( dirname $(dirname $FILENAME))
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# EDITOR
-export EDITOR="$BREW_PATH/bin/mate -w"
-
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 
 # BREW to path
 export BREW_PATH=/usr/local
 export PATH=$BREW_PATH:$PATH
+
+# EDITOR
+export EDITOR="$BREW_PATH/bin/mate -w"
 
 # python2 to path
 export PATH=$PATH:$BREW_PATH/opt/python@2/bin
