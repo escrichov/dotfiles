@@ -65,6 +65,7 @@ brew 'progress' # Progress for cp, tar, dd, ...
 brew 'ssh-copy-id' # For copy ssh public keys to servers
 brew 'zsh-syntax-highlighting' # ZSH Plugin for syntax highlighting
 brew 'zsh-autosuggestions' # ZSH Plugin for syntax autosuggestions
+brew 'balena-cli' # For balena.io
 
 # Applications
 cask 'google-chrome'
