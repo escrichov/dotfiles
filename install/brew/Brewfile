@@ -107,6 +107,7 @@ cask 'anaconda'
 cask 'poedit'
 cask 'anki'
 cask 'docker'
+cask 'darktable'
 #cask 'unrarx'
 #cask 'spectacle' # Window management
 #cask 'logitech-gaming-software' # Logitech keyboard
@@ -125,3 +126,4 @@ mas 'Microsoft OneNote', id: 784801555
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
+
