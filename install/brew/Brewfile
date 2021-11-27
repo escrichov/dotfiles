@@ -67,6 +67,7 @@ brew 'zsh-autosuggestions' # ZSH Plugin for syntax autosuggestions
 brew 'balena-cli' # For balena.io
 brew 'php'
 brew 'virtualenv'
+brew 'devutils'
 
 # Applications
 cask 'google-chrome'
@@ -123,3 +124,4 @@ mas 'Pocket', id: 568494494
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
+mas 'Encrypto: Secure Your Files', id: 935235287
