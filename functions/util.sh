@@ -83,3 +83,24 @@ function update() {
 	gem update —system
 	gem update
 }
+
+function update-mac() {
+	# Update Mac OS X
+	sudo softwareupdate -i -a
+
+	# Update App Store apps
+	mas upgrade
+
+	# Update Homebrew (Cask) & packages
+	brew update
+	brew upgrade
+}
+
+function update-apps() {
+	# Update App Store apps
+	mas upgrade
+
+	# Update Homebrew (Cask) & packages
+	brew update
+	brew upgrade
+}
