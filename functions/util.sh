@@ -73,8 +73,7 @@ function update() {
 	brew upgrade
 
 	# Update pip & virtualenv
-	gpip2 install --upgrade pip virtualenv
-	gpip3 install --upgrade pip virtualenv
+	gpip install --upgrade pip virtualenv
 
 	# Update npm & packages
 	npm install npm -g
