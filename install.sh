@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -e
 
 DOTFILES_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 INSTALL_DIR=$DOTFILES_DIRECTORY/install
@@ -55,7 +56,7 @@ trap _term INT
 print_title
 
 # Ask for sudo only first
-print_step "Ask for sudo password only once"
+print_step "Ask for sudo password upfront"
 sudo -v # ask for sudo upfront
 
 # Create configuration file with Name, Email
@@ -85,9 +86,11 @@ fi
 
     if [ ! -f $BREW_BIN ]; then
         print_step "Installing Brew"
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
     else
         print_step "Updating Brew"
+
         brew update
         brew upgrade
     fi
@@ -103,7 +106,7 @@ fi
     print_step "Xcode command line developer tools"
     ./xcode.sh
 
-    print_step "Installing system preferences"
+    print_step "Installing system Preferences"
     sudo ./osx-system-defaults.sh
 )
 
@@ -173,7 +176,6 @@ fi
 (
     print_step "Installing source files to ZSH"
     grep -q -F "source $DOTFILES_DIRECTORY/env_all.sh" $BASHRC || echo "source $DOTFILES_DIRECTORY/env_all.sh" >> $BASHRC
-    source $BASHRC
 )
 
 # Install fzf autocompletion
@@ -182,26 +184,11 @@ fi
     $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
 )
 
-# Install python pip
-(
-    print_step "Installing python pip"
-    brew postinstall python2
-    brew postinstall python3
-)
-
-# Install python virtualenv
-(
-    print_step "Installing python virtualenv"
-	gpip2 install pyobjc  		# For setup-dock https://stackoverflow.com/questions/1614648/importerror-no-module-named-foundation
-    gpip2 install virtualenv
-    gpip3 install virtualenv
-)
-
 # Generate new id_rsa only if not exists
 (
-    if [ ! -f ~/.ssh/id_rsa ]; then
-        print_step "Installing New RSA Private Key"
-        ssh-keygen -t rsa -b 4096 -C "$EMAIL"
+    if [ ! -f ~//.ssh/id_ed25519 ]; then
+        print_step "Installing New Elliptic Curve ed25519 Private Key"
+        ssh-keygen -t ed25519 -C "$EMAIL"
     fi
 )
 
