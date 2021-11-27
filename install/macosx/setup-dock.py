@@ -21,10 +21,10 @@ from Foundation import CFPreferencesAppSynchronize
 # Standard Applications
 # =======================================
 appleApps = [
-    "/Applications/Launchpad.app",
-    "/Applications/Mail.app",
-    "/Applications/Calendar.app",
-    ]
+    "/System/Applications/Launchpad.app",
+    "/System/Applications/Mail.app",
+    "/System/Applications/Calendar.app",
+]
 
 # =======================================
 # Standard Applications with different
@@ -45,7 +45,7 @@ thirdPartyApps = [
     "forced": True
     },
     {
-    "path": "/Applications/IntelliJ Idea.app",
+    "path": "/Applications/Pycharm.app",
     "args": [],
     "forced": True
     },
@@ -62,11 +62,6 @@ thirdPartyApps = [
     {
     "path": "/Applications/Spotify.app",
     "args": [],
-    "forced": True
-    },
-    {
-    "path": "/Applications/Textmate.app",
-    "args": [ ],
     "forced": True
     },
     {
