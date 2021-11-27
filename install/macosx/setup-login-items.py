@@ -13,6 +13,7 @@ import sys
 loginItems = [
     '{path: "/Applications/Dropbox.app", hidden:false}',
     '{path: "/Applications/Magnet.app", hidden:false}',
+    '{path: "/Applications/CopyLess 2.app", hidden:false}',
 ]
 
 
