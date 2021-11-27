@@ -22,7 +22,7 @@ fi
 # Source all shell functions
 for entry in "$FUNCTIONS_DIR"/*.sh
 do
-  source "$entry"
+	source "$entry"
 done
 
 # Add Dotfiles Binaries to PATH
