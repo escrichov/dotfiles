@@ -41,8 +41,8 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 
 # Add Keys to SSH Agent
-if [ -f ~/.ssh/id_rsa ]; then
-    ssh-add -K ~/.ssh/id_rsa &> /dev/null
+if [ -f ~/.ssh/id_ed25519 ]; then
+    ssh-add -K ~/.ssh/id_ed25519 &> /dev/null
 fi
 
 # Load fuzzy finder (fzf)

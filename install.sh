@@ -186,7 +186,7 @@ fi
 
 # Generate new id_rsa only if not exists
 (
-    if [ ! -f ~//.ssh/id_ed25519 ]; then
+    if [ ! -f ~/.ssh/id_ed25519 ]; then
         print_step "Installing New Elliptic Curve ed25519 Private Key"
         ssh-keygen -t ed25519 -C "$EMAIL"
     fi
