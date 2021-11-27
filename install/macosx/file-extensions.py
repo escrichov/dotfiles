@@ -19,8 +19,6 @@ app_extensions = [
     ("VLC", ".3gp"),
     ("VLC", ".h264"),
 
-    ("MacDown", ".md"),
-
     ("TextMate", ".txt"),
     ("TextMate", ".c"),
     ("TextMate", ".h"),
