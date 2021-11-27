@@ -24,16 +24,7 @@
 
 
 packages=(
-    git-recent
-    git-open
-    gulp
     http-server
-    servedir
-    npm-check-updates
-    webpack
-    nodemon
-    yo
-	explain-command
 	imageoptim-cli
 )
 
