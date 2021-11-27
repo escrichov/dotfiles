@@ -2,8 +2,8 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 tap 'heroku/brew'
-tap 'caskroom/cask'
-tap 'caskroom/drivers' # Logitech options
+tap 'homebrew/cask'
+tap 'homebrew/cask-drivers' # Logitech options
 
 # Libraries & Utilities
 brew 'stow' # for nokogiri
@@ -11,11 +11,9 @@ brew 'libxml2' # for nokogiri
 brew 'coreutils'
 brew 'sqlite3'
 brew 'go' # Golang
-brew 'govendor'
 brew 'openssl'
 brew 'rbenv' # Ruby installation
 brew 'ruby-build' # Ruby installation
-brew 'unrar'
 brew 'wget'
 brew 'youtube-dl'
 brew 'awscli'
@@ -29,10 +27,11 @@ brew 'heroku/brew/heroku'
 brew 'httpie'
 brew 'nmap'
 brew 'mysql'
-brew 'python2'
-brew 'python3'
+brew 'python'
+brew 'pyenv'
+brew 'pyenv-virtualenv'
 brew 'redis'
-brew 'rmtrash'
+#brew 'rmtrash'
 brew 'rust'
 brew 's3cmd'
 brew 'tree'
@@ -66,6 +65,8 @@ brew 'ssh-copy-id' # For copy ssh public keys to servers
 brew 'zsh-syntax-highlighting' # ZSH Plugin for syntax highlighting
 brew 'zsh-autosuggestions' # ZSH Plugin for syntax autosuggestions
 brew 'balena-cli' # For balena.io
+brew 'php'
+brew 'virtualenv'
 
 # Applications
 cask 'google-chrome'
@@ -76,43 +77,40 @@ cask 'postman'
 cask 'sketch'
 cask 'sequel-pro'
 cask 'calibre'
-cask 'evernote'
 cask 'dropbox'
 cask 'iterm2'
 cask 'intellij-idea'
-cask 'kitematic'
+cask 'clion'
+cask 'pycharm'
+cask 'phpstorm'
+cask 'rider'
+cask 'rubymine'
+cask 'webstorm'
 cask 'spotify'
-cask 'musixmatch'
 cask 'superduper'
 cask 'the-unarchiver'
 cask 'textmate'
-cask 'whatsapp'
 cask 'vlc'
-cask 'transmission'
-cask 'macdown'
-cask 'plex-media-server'
 cask 'maintenance'
 cask 'basecamp'
 cask 'imageoptim' # Optimize jpeg images
 cask 'imagealpha' # Optimize png images
 cask 'mactex' # LaTeX for Mac
-cask 'keybase'
 cask 'visual-studio-code'
-cask 'docker-toolbox'
 cask 'logitech-options' # Logitech Mx Master
-cask 'flowsync' # Polar watch
-cask 'etcher' # Flash usb and SD Cards
+cask 'balenaetcher' # Flash usb and SD Cards
 cask 'chromedriver'
 cask 'anaconda'
 cask 'poedit'
 cask 'anki'
 cask 'docker'
 cask 'darktable'
-#cask 'unrarx'
-#cask 'spectacle' # Window management
-#cask 'logitech-gaming-software' # Logitech keyboard
-#cask 'soundflower' # Control monitor speakers
-#cask 'soundflowerbed' # Control monitor speakers
+cask 'sublime-text'
+cask 'dash' # Software API documentation
+cask 'unity'
+cask 'postgres-unofficial'
+cask 'dotnet'
+cask 'iina'
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
@@ -122,8 +120,6 @@ mas 'Numbers', id: 409203825
 mas 'iMovie', id: 408981434
 mas 'Pocket', id: 568494494
 #mas 'Pixelmator', id: 407963104
-mas 'Microsoft OneNote', id: 784801555
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
-
