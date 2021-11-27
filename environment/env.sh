@@ -12,17 +12,16 @@ export LANG=en_US.UTF-8
 export PIP_REQUIRE_VIRTUALENV=true
 
 # BREW to path
-export BREW_PATH=/usr/local
-export PATH=$BREW_PATH:$PATH
+export BREW_PATH=/opt/homebrew
+export PATH=$BREW_PATH/bin:$PATH
 
 # EDITOR
 export EDITOR="$BREW_PATH/bin/mate -w"
 
-# python2 to path
-export PATH=$PATH:$BREW_PATH/opt/python@2/bin
-
 # Conda
-source /usr/local/anaconda3/etc/profile.d/conda.sh
+if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
+    source /usr/local/anaconda3/etc/profile.d/conda.sh
+fi
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -42,7 +41,11 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 
 # Add Keys to SSH Agent
-ssh-add -K ~/.ssh/id_rsa &> /dev/null
+if [ -f ~/.ssh/id_rsa ]; then
+    ssh-add -K ~/.ssh/id_rsa &> /dev/null
+fi
 
 # Load fuzzy finder (fzf)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+fi
