@@ -68,6 +68,8 @@ brew 'balena-cli' # For balena.io
 brew 'php'
 brew 'virtualenv'
 brew 'devutils'
+brew 'pipenv'
+brew 'yarn'
 
 # Applications
 cask 'google-chrome'
@@ -87,6 +89,7 @@ cask 'phpstorm'
 cask 'rider'
 cask 'rubymine'
 cask 'webstorm'
+cask 'goland'
 cask 'spotify'
 cask 'superduper'
 cask 'the-unarchiver'

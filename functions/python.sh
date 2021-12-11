@@ -4,6 +4,7 @@ export PIPENV_VENV_IN_PROJECT=1
 
 alias pyc-remove='find . -name "*.pyc" -exec rm -f {} \;'
 alias pip='pip3'
+alias pythonr='pipenv run python'
 
 gpip(){
     PIP_REQUIRE_VIRTUALENV="" pip "$@"
