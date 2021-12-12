@@ -396,7 +396,7 @@ CFPreferencesAppSynchronize "com.apple.DiskUtility"
 function killallApps() {
     killall "Finder" > /dev/null 2>&1
     killall "SystemUIServer" > /dev/null 2>&1
-    killall "Dock" > /dev/null 2>&1
+    #killall "Dock" > /dev/null 2>&1
 
 
     appsToKill=(
