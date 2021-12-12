@@ -73,6 +73,7 @@ brew 'mingw-w64' # Windows cross compilers
 brew 'k6'
 brew 'hey'
 brew 'nakabonne/ali/ali'
+brew 'bat'
 
 # Applications
 cask 'google-chrome'

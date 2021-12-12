@@ -123,6 +123,11 @@ fi
     stow --target=$HOME --dir=$DOTFILES_DIRECTORY dots
 )
 
+# NNN plugins
+(
+    curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
+)
+
 # Install npm packages
 (
     cd $INSTALL_DIR/node

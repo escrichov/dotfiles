@@ -49,3 +49,8 @@ fi
 if [ -f ~/.fzf.zsh ]; then
     source ~/.fzf.zsh
 fi
+
+# NNN terminal file manager
+export NNN_PLUG='p:preview-tui'
+export NNN_FIFO=/tmp/nnn.fifo
+export PAGER="less -R"
