@@ -70,6 +70,10 @@ brew 'virtualenv'
 brew 'devutils'
 brew 'pipenv'
 brew 'yarn'
+brew 'mingw-w64' # Windows cross compilers
+brew 'k6'
+brew 'hey'
+brew 'nakabonne/ali/ali'
 
 # Applications
 cask 'google-chrome'
