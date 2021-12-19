@@ -74,6 +74,7 @@ brew 'k6'
 brew 'hey'
 brew 'nakabonne/ali/ali'
 brew 'bat'
+brew 'mailhog'
 
 # Applications
 cask 'google-chrome'
