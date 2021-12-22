@@ -75,6 +75,8 @@ brew 'hey'
 brew 'nakabonne/ali/ali'
 brew 'bat'
 brew 'mailhog'
+brew 'http-toolkit'
+brew 'exa'
 
 # Applications
 cask 'google-chrome'
