@@ -122,6 +122,7 @@ cask 'unity'
 cask 'postgres-unofficial'
 cask 'dotnet'
 cask 'iina'
+cask 'transmission'
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
