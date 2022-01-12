@@ -77,6 +77,7 @@ brew 'bat'
 brew 'mailhog'
 brew 'http-toolkit'
 brew 'exa'
+brew 'dog'
 
 # Applications
 cask 'google-chrome'
@@ -123,6 +124,7 @@ cask 'postgres-unofficial'
 cask 'dotnet'
 cask 'iina'
 cask 'transmission'
+cask 'tunnelblick'
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
