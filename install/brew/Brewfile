@@ -125,6 +125,7 @@ cask 'dotnet'
 cask 'iina'
 cask 'transmission'
 cask 'tunnelblick'
+cask 'skype'
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
