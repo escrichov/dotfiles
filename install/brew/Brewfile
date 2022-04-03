@@ -126,6 +126,7 @@ cask 'iina'
 cask 'transmission'
 cask 'tunnelblick'
 cask 'skype'
+cask 'appcleaner'
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
@@ -134,7 +135,6 @@ mas 'Keynote', id: 409183694
 mas 'Numbers', id: 409203825
 mas 'iMovie', id: 408981434
 mas 'Pocket', id: 568494494
-#mas 'Pixelmator', id: 407963104
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
