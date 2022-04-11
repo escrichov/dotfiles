@@ -78,6 +78,7 @@ brew 'mailhog'
 brew 'http-toolkit'
 brew 'exa'
 brew 'dog'
+brew 'navi'
 
 # Applications
 cask 'google-chrome'
