@@ -142,6 +142,16 @@ fi
     ./gems.sh
 )
 
+# Install poetry with pipx
+(
+    pipx install poetry
+)
+
+# Install NVM Directory
+(
+    mkdir $HOME/.nvm
+)
+
 # Install Oh my ZSH
 (
     if [ ! -d "$OHMYZSHDIRECTORY" ]; then

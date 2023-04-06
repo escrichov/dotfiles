@@ -61,16 +61,25 @@ function reload() {
     source $DOTFILES_DIR/env_all.sh
 }
 
-function update() {
-	# Update Mac OS X
-	sudo softwareupdate -i -a
 
+function update-apps() {
 	# Update App Store apps
 	mas upgrade
 
 	# Update Homebrew (Cask) & packages
 	brew update
 	brew upgrade
+}
+
+function update-mac() {
+	# Update Mac OS X
+	sudo softwareupdate -i -a
+
+	update-apps
+}
+
+function update() {
+	update-mac
 
 	# Update pip & virtualenv
 	gpip install --upgrade pip virtualenv
@@ -82,25 +91,7 @@ function update() {
 	# Update Ruby & gems
 	gem update —system
 	gem update
-}
 
-function update-mac() {
-	# Update Mac OS X
-	sudo softwareupdate -i -a
-
-	# Update App Store apps
-	mas upgrade
-
-	# Update Homebrew (Cask) & packages
-	brew update
-	brew upgrade
-}
-
-function update-apps() {
-	# Update App Store apps
-	mas upgrade
-
-	# Update Homebrew (Cask) & packages
-	brew update
-	brew upgrade
+	# Upgrade poetry
+	pipx upgrade poetry
 }

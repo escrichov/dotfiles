@@ -69,6 +69,8 @@ brew 'balena-cli' # For balena.io
 brew 'php'
 brew 'virtualenv'
 brew 'pipenv'
+brew 'pipx'
+brew 'poetry'
 brew 'yarn'
 brew 'mingw-w64' # Windows cross compilers
 brew 'k6'
@@ -80,6 +82,7 @@ brew 'http-toolkit'
 brew 'exa'
 brew 'dog'
 brew 'navi'
+brew 'nvm'
 
 # Applications
 cask 'google-chrome'
