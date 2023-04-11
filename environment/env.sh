@@ -15,6 +15,10 @@ export PIP_REQUIRE_VIRTUALENV=true
 export BREW_PATH=/opt/homebrew
 export PATH=$BREW_PATH/bin:$PATH
 
+# Pipx to path
+export PIPX_BIN_PATH=$HOME/.local/bin
+export PATH=$PATH:$PIPX_BIN_PATH
+
 # EDITOR
 export EDITOR="$BREW_PATH/bin/mate -w"
 
@@ -62,5 +66,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if [ -x "$(command -v pyenv)" ]; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi

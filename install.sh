@@ -145,6 +145,7 @@ fi
 # Install poetry with pipx
 (
     pipx install poetry
+    poetry config virtualenvs.in-project true
 )
 
 # Install NVM Directory
