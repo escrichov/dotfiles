@@ -6,3 +6,4 @@ dots/.ssh/known_hosts
 !dots/.ssh/config.d/.gitkeep
 dots/.gitconfig.credentials
 dots/.ssh/id_rsa*
+swiftbar-plugins
