@@ -21,4 +21,4 @@ if [ "$RETURN_CODE" = "1" ]; then
     exit $RETURN_CODE
 fi
 
-duti -s $BUNDLE_ID $EXTENSION all
+duti -s "$BUNDLE_ID" "$EXTENSION" all
