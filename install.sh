@@ -142,6 +142,12 @@ fi
     ./gems.sh
 )
 
+# Install rustup
+(
+    print_step "Installing Rustup"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+)
+
 # Install poetry with pipx
 (
     pipx install poetry
