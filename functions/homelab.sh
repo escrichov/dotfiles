@@ -1,0 +1,6 @@
+alias homelab-wake='wakeonlan -i 192.168.1.255 -p 1234 ${HOMELAB_MAC}'
+alias homelab-shutdown='ssh homelab "sudo poweroff"'
+alias homelab-reboot-windows='ssh homelab "sudo grub-reboot 2; sudo reboot"'
+alias homelab-update='ssh -t homelab /bin/bash -ic "update"'
+alias homelab-windows-shutdown='ssh homelabwin "shutdown /s /t 0"'
+alias pcsarrion-wake='wakeonlan -i 10.0.0.255 -p 1234 ${HOMELAB2_MAC}'

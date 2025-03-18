@@ -1,0 +1,2 @@
+alias raspberry2-update='ssh raspberry2 "sudo apt-get update && sudo apt-get -y full-upgrade && sudo pihole -up && sudo pihole -g"'
+alias raspberrysarrion-update='ssh raspberrysarrion "sudo apt-get update && sudo apt-get -y full-upgrade"'
