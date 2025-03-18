@@ -94,4 +94,7 @@ function update() {
 
 	# Upgrade poetry
 	pipx upgrade poetry
+
+    # Upgrade rustup
+    rustup upgrade
 }
