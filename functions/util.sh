@@ -72,38 +72,6 @@ function update-apps() {
 	brew upgrade
 }
 
-# update-mac: actualiza macOS (solo lo que NO es del SO) y luego las apps.
-function update-mac() {
-	# Instala solo las actualizaciones que NO son del sistema operativo
-	# (Command Line Tools, Safari, etc.). Las actualizaciones de macOS en si
-	# ("macOS Tahoe ...") son una descarga enorme y en Apple Silicon piden
-	# autenticacion varias veces (sudo + propietario del volumen para el
-	# reinicio), asi que se dejan para instalarlas a mano desde Ajustes.
-	local list labels
-	list=$(softwareupdate -l 2>&1)
-	labels=$(printf '%s\n' "$list" | sed -n 's/^\* Label: //p' | grep -vi '^macOS ')
-
-	if [ -n "$labels" ]; then
-		local -a args
-		while IFS= read -r label; do
-			[ -n "$label" ] && args+=("$label")
-		done <<< "$labels"
-		echo "macOS: instalando ${#args[@]} actualizacion(es) (requiere sudo):"
-		printf '  - %s\n' "${args[@]}"
-		sudo softwareupdate -i "${args[@]}"
-	else
-		echo "macOS: sin actualizaciones (aparte del propio sistema)."
-	fi
-
-	# Aviso (sin instalar) si hay una actualizacion del SO pendiente
-	if printf '%s\n' "$list" | grep -qi '^\* Label: macOS '; then
-		echo "macOS: hay una actualizacion del SISTEMA pendiente. Instalala con"
-		echo "       'update-macos' (reinicia el equipo) o desde Ajustes del Sistema."
-	fi
-
-	update-apps
-}
-
 # update-macos: instala la actualizacion del propio macOS (separada de 'update'
 # porque es una descarga grande, pide autenticacion varias veces y reinicia).
 function update-macos() {
@@ -134,12 +102,32 @@ function update-macos() {
 
 # update: actualiza todo (macOS no-SO, apps, brew, npm, gem, pipx, rustup, omz).
 function update() {
-	# 'update' solo pide sudo si hay actualizaciones de macOS que instalar
-	# (ver update-mac). Todo lo demas (brew, mas, npm, gem, pipx, rustup, omz)
-	# se actualiza sin sudo, asi que muchas veces no hara falta contrasena.
-	update-mac
+	# 1) Actualizaciones de macOS que NO son del sistema operativo (Command
+	# Line Tools, Safari...). Las del SO en si ("macOS Tahoe ...") van aparte
+	# con 'update-macos'. Solo se pide sudo si hay algo (no-SO) que instalar.
+	local list labels
+	list=$(softwareupdate -l 2>&1)
+	labels=$(printf '%s\n' "$list" | sed -n 's/^\* Label: //p' | grep -vi '^macOS ')
+	if [ -n "$labels" ]; then
+		local -a args
+		while IFS= read -r label; do
+			[ -n "$label" ] && args+=("$label")
+		done <<< "$labels"
+		echo "macOS: instalando ${#args[@]} actualizacion(es) (requiere sudo):"
+		printf '  - %s\n' "${args[@]}"
+		sudo softwareupdate -i "${args[@]}"
+	else
+		echo "macOS: sin actualizaciones (aparte del propio sistema)."
+	fi
+	if printf '%s\n' "$list" | grep -qi '^\* Label: macOS '; then
+		echo "macOS: hay una actualizacion del SISTEMA pendiente. Instalala con"
+		echo "       'update-macos' (reinicia el equipo) o desde Ajustes del Sistema."
+	fi
 
-	# Update oh-my-zsh (su auto-update automatico esta desactivado en .zshrc
+	# 2) App Store (mas) + Homebrew
+	update-apps
+
+	# 3) oh-my-zsh (su auto-update automatico esta desactivado en .zshrc
 	# para acelerar el arranque, asi que se actualiza aqui a mano)
 	command -v omz >/dev/null 2>&1 && omz update
 
