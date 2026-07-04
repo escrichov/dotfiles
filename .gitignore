@@ -7,3 +7,4 @@ dots/.ssh/known_hosts
 !dots/.ssh/config.d/local_pc.conf
 dots/.gitconfig.credentials
 dots/.ssh/id_rsa*
+dots/.ssh/id_ed25519*

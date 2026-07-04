@@ -3,46 +3,46 @@
 
 # tar alias
 function tar-compress {
-	DIR=$1
-	tar -zcf $DIR.tar.gz $DIR
+	local DIR=$1
+	tar -zcf "$DIR.tar.gz" "$DIR"
 }
 
 alias tar-decompress='tar -zxf'
 
 function search-content {
-    DIR=$1
-    PATTERN=$2
+    local DIR=$1
+    local PATTERN=$2
 
-    if [ -z $DIR ] || [ -z $PATTERN ];then
+    if [ -z "$DIR" ] || [ -z "$PATTERN" ];then
         echo "Usage: $0 [directory] [pattern]"
         return 1
     fi
 
-    grep -R "$PATTERN" $DIR 2> /dev/null
+    grep -R "$PATTERN" "$DIR" 2> /dev/null
 }
 
 function search-files {
-    DIR=$1
-    PATTERN=$2
+    local DIR=$1
+    local PATTERN=$2
 
-    if [ -z $DIR ] || [ -z $PATTERN ];then
+    if [ -z "$DIR" ] || [ -z "$PATTERN" ];then
         echo "Usage: $0 [directory] [pattern]"
         return 1
     fi
 
-    find $DIR -iname "$PATTERN" 2> /dev/null
+    find "$DIR" -iname "$PATTERN" 2> /dev/null
 }
 
 function remux {
-    INPUT=$1
-    OUTPUT=$2
+    local INPUT=$1
+    local OUTPUT=$2
 
-    if [ -z $INPUT ] || [ -z $OUTPUT ];then
+    if [ -z "$INPUT" ] || [ -z "$OUTPUT" ];then
         echo "Usage: $0 [input.avi] [output.mp4]"
         return 1
     fi
 
-    ffmpeg -i $INPUT -c:v copy -c:a copy $OUTPUT
+    ffmpeg -i "$INPUT" -c:v copy -c:a copy "$OUTPUT"
 }
 
 # Coloring man pages
@@ -85,11 +85,11 @@ function update() {
 	gpip install --upgrade pip virtualenv
 
 	# Update npm & packages
-	npm install npm -g
+	npm install -g npm
 	npm update -g
 
 	# Update Ruby & gems
-	gem update —system
+	gem update --system
 	gem update
 
 	# Upgrade poetry

@@ -5,6 +5,7 @@ if [ -z "$SCRIPT_DIR" ]; then
 	SCRIPT_DIR=$0
 fi
 DIR=$(cd `dirname $SCRIPT_DIR` && pwd)
+export DOTFILES_DIR=$DIR
 BINARIES_DIR=$DIR/bin
 FUNCTIONS_DIR=$DIR/functions
 ENVIRONMENT_DIR=$DIR/environment

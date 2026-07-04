@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# DOTFILES DIRECTORY
-FILENAME=$_
-export DOTFILES_DIR=$( dirname $(dirname $FILENAME))
+# DOTFILES_DIR lo exporta env_all.sh de forma fiable (BASH_SOURCE/$0)
 
 # PATH AND ENVIRONMENT VARIABLES
 export LC_ALL=en_US.UTF-8
@@ -19,8 +17,12 @@ export PATH=$BREW_PATH/bin:$PATH
 export PIPX_BIN_PATH=$HOME/.local/bin
 export PATH=$PATH:$PIPX_BIN_PATH
 
-# EDITOR
-export EDITOR="$BREW_PATH/bin/mate -w"
+# EDITOR (TextMate si está; si no, vim)
+if command -v mate > /dev/null 2>&1; then
+    export EDITOR="mate -w"
+else
+    export EDITOR="vim"
+fi
 
 # Conda
 if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
@@ -30,23 +32,22 @@ fi
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# MacText to path
-export PATH=$PATH:$BREW_PATH/texbin
+# MacTeX to path
+export PATH=$PATH:/Library/TeX/texbin
 
-# Golang environment
-export PATH=$PATH:$BREW_PATH/go/bin
+# Golang environment (el binario go va en $BREW_PATH/bin; solo hace falta GOPATH/bin)
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # Gettext
-export PATH="/usr/local/opt/gettext/bin:$PATH"
+export PATH="$BREW_PATH/opt/gettext/bin:$PATH"
 
 # Java HOME
 export JAVA_HOME="$(/usr/libexec/java_home 2> /dev/null)"
 
-# Add Keys to SSH Agent
+# Add Keys to SSH Agent (llavero de Apple; -K quedó obsoleto)
 if [ -f ~/.ssh/id_ed25519 ]; then
-    ssh-add -K ~/.ssh/id_ed25519 &> /dev/null
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519 &> /dev/null
 fi
 
 # Load fuzzy finder (fzf)
@@ -63,7 +64,6 @@ export PAGER="less -R"
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-export PATH=$PATH:$NVM_DIR
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
