@@ -110,8 +110,6 @@ cask 'textmate'
 cask 'vlc'
 cask 'maintenance'
 cask 'basecamp'
-cask 'imageoptim' # Optimize jpeg images
-cask 'imagealpha' # Optimize png images
 cask 'mactex' # LaTeX for Mac
 cask 'visual-studio-code'
 cask 'logi-options-plus' # Logitech Mx Master (reemplaza a logitech-options, discontinuada)
