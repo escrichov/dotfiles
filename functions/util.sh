@@ -79,6 +79,19 @@ function update-mac() {
 }
 
 function update() {
+	# Pide la contrasena de sudo UNA sola vez al principio y la mantiene viva
+	# en segundo plano mientras dura el update, para no volver a preguntar a
+	# mitad. Lo unico que necesita sudo es 'softwareupdate'; el resto (brew,
+	# mas, npm, gem, pipx, rustup, omz) se actualiza sin sudo.
+	if ! sudo -v; then
+		echo "update: se necesita sudo para softwareupdate" >&2
+		return 1
+	fi
+	# Keep-alive: refresca el timestamp de sudo cada 60s hasta que update acabe
+	# (o hasta que se cierre esta shell).
+	while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done &
+	local _sudo_keepalive=$!
+
 	update-mac
 
 	# Update oh-my-zsh (su auto-update automatico esta desactivado en .zshrc
@@ -102,4 +115,7 @@ function update() {
 	# Update Rust toolchains and rustup itself
 	rustup update
 	rustup self update
+
+	# Parar el keep-alive de sudo
+	kill "$_sudo_keepalive" 2>/dev/null
 }
