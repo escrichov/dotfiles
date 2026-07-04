@@ -159,7 +159,18 @@ function update() {
 		# rack vs rackup) no lance un prompt que cuelgue el update: al no haber
 		# stdin, se toma la opcion por defecto (no sobreescribir).
 		gem update --system --no-document < /dev/null
-		gem update --no-document < /dev/null
+
+		# Se actualizan las gemas explicitamente EXCLUYENDO las "congeladas":
+		# aquellas cuya ultima version exige un Ruby mas nuevo del instalado y
+		# que solo viven como dependencia fijada. Ej.: 'xdg' 10.x pide Ruby
+		# >= 4.0 y aqui solo la usa tmuxinator ('~> 2.2'); un 'gem update' pelado
+		# la intentaba cada vez y soltaba un ERROR inofensivo pero molesto.
+		local _gem_hold="xdg"
+		local -a _gems; local _g
+		while IFS= read -r _g; do
+			[ -n "$_g" ] && [ "$_g" != "$_gem_hold" ] && _gems+=("$_g")
+		done < <(gem list --no-versions 2>/dev/null)
+		[ ${#_gems[@]} -gt 0 ] && gem update --no-document "${_gems[@]}" < /dev/null
 	else
 		echo "gems: saltado (Ruby $(ruby -v 2>/dev/null | awk '{print $2}') es viejo)."
 		echo "      Actualiza con: rbenv install 3.4.10 && rbenv global 3.4.10"
