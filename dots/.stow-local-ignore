@@ -22,6 +22,8 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
+.+\.example  # plantillas de config: no enlazarlas al $HOME
+
 ^/README.*
 ^/LICENSE.*
 ^/COPYING

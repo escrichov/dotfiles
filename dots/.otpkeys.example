@@ -1,0 +1,11 @@
+# Plantilla para ~/.otpkeys (usado por el comando `otp`).
+#
+# Uso:
+#   cp dots/.otpkeys.example dots/.otpkeys   # o crea ~/.otpkeys directamente
+#   chmod 600 ~/.otpkeys                      # obligatorio: son secretos
+#   otp google                               # genera el código TOTP
+#
+# Un secreto por línea, formato: nombre=SECRETO_BASE32
+# NO commitees el fichero real: dots/.otpkeys está en .gitignore.
+aws=BASE32SECRET
+google=BASE32SECRET

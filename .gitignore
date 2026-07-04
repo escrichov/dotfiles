@@ -8,3 +8,6 @@ dots/.ssh/known_hosts
 dots/.gitconfig.credentials
 dots/.ssh/id_rsa*
 dots/.ssh/id_ed25519*
+
+# Secretos TOTP: se trackea solo la plantilla .example, no el fichero real
+dots/.otpkeys
