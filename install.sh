@@ -264,8 +264,8 @@ fi
     python3 file-extensions.py
 )
 
-# Restore configuration of apps
-print_step "Restore apps configuration and preferences"
-mackup restore -f
+# Restore application preferences (defaults export/import; reemplaza a mackup)
+print_step "Restore application preferences"
+restore-defaults
 
 exit 0

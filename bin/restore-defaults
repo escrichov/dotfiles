@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+# restore-defaults — importa las preferencias (defaults) previamente guardadas
+# con backup-defaults. Lo ejecuta install.sh en un Mac nuevo.
+# Si no hay carpeta de backup (p.ej. Dropbox aún sin sincronizar), no hace nada
+# y sale 0 para no abortar la instalación.
+#
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+    DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
+    SOURCE=$(readlink "$SOURCE")
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+BIN_DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
+REPO_DIR=$(dirname "$BIN_DIR")
+
+LIST="${DOTFILES_DEFAULTS_LIST:-$REPO_DIR/install/macosx/defaults-apps.txt}"
+BACKUP_DIR="${DEFAULTS_BACKUP_DIR:-$HOME/Dropbox/Apps/defaults-backup}"
+
+[ -f "$LIST" ] || { echo "No existe la lista de dominios: $LIST" >&2; exit 1; }
+[ -d "$BACKUP_DIR" ] || { echo "No hay backup en $BACKUP_DIR — nada que restaurar"; exit 0; }
+
+while IFS= read -r line || [ -n "$line" ]; do
+    domain="${line%%#*}"
+    domain="$(echo "$domain" | xargs)"
+    [ -z "$domain" ] && continue
+    plist="$BACKUP_DIR/$domain.plist"
+    if [ -f "$plist" ]; then
+        if defaults import "$domain" "$plist"; then
+            echo "restore $domain"
+        else
+            echo "warn    fallo importando $domain" >&2
+        fi
+    else
+        echo "skip    $domain (sin backup)"
+    fi
+done < "$LIST"
+
+echo "Restauración completa. Cierra sesión y vuelve a entrar para aplicar todo."

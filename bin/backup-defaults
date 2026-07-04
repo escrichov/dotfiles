@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+#
+# backup-defaults — exporta las preferencias (defaults) de las apps listadas
+# en install/macosx/defaults-apps.txt a una carpeta sincronizada (Dropbox).
+# Reemplaza a mackup: usa 'defaults export' (robusto, sin symlinks).
+#
+# Variables opcionales:
+#   DEFAULTS_BACKUP_DIR   carpeta destino (por defecto ~/Dropbox/Apps/defaults-backup)
+#   DOTFILES_DEFAULTS_LIST  ruta de la lista de dominios
+#
+set -euo pipefail
+
+# Resolver la ruta real de este script (aunque se llame vía symlink/PATH)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+    DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
+    SOURCE=$(readlink "$SOURCE")
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+BIN_DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
+REPO_DIR=$(dirname "$BIN_DIR")
+
+LIST="${DOTFILES_DEFAULTS_LIST:-$REPO_DIR/install/macosx/defaults-apps.txt}"
+BACKUP_DIR="${DEFAULTS_BACKUP_DIR:-$HOME/Dropbox/Apps/defaults-backup}"
+
+[ -f "$LIST" ] || { echo "No existe la lista de dominios: $LIST" >&2; exit 1; }
+mkdir -p "$BACKUP_DIR"
+
+while IFS= read -r line || [ -n "$line" ]; do
+    domain="${line%%#*}"                 # quita comentario en línea
+    domain="$(echo "$domain" | xargs)"   # trim espacios
+    [ -z "$domain" ] && continue
+    if defaults export "$domain" "$BACKUP_DIR/$domain.plist" 2>/dev/null; then
+        echo "backup  $domain"
+    else
+        echo "skip    $domain (sin preferencias)"
+    fi
+done < "$LIST"
+
+echo "Backup guardado en: $BACKUP_DIR"

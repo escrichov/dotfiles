@@ -1,0 +1,20 @@
+# Dominios de preferencias (defaults) a sincronizar entre Macs.
+# Reemplaza a mackup. Un dominio por línea; '#' inicia comentario.
+#
+# Cómo encontrar el dominio de una app:
+#   defaults domains | tr ',' '\n' | grep -i <nombre>
+#   osascript -e 'id of app "Nombre de la App"'
+#
+#   backup-defaults   -> exporta estos dominios a la carpeta de backup (Dropbox)
+#   restore-defaults  -> los importa (install.sh lo hace en un Mac nuevo)
+
+com.googlecode.iterm2          # iTerm2
+cx.c3.theunarchiver            # The Unarchiver
+
+# Ejemplos frecuentes (descomenta los que uses):
+# com.apple.Terminal
+# org.videolan.vlc
+# com.colliderli.iina           # IINA
+# com.microsoft.VSCode          # (VS Code guarda casi todo en archivos, no en defaults)
+# com.sublimetext.4
+# com.if.Amphetamine

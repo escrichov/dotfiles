@@ -10,5 +10,6 @@ alias dns-flush='sudo killall -HUP mDNSResponder'
 # 'airport' fue eliminado en macOS 14.4. Info de wifi con wdutil (requiere sudo):
 alias wifi-info='sudo wdutil info'
 
-alias backup-conf="mackup backup -f"
-alias restore-conf="mackup restore -f"
+# Backup/restore de preferencias de apps vía 'defaults' (reemplaza a mackup)
+alias backup-conf="backup-defaults"
+alias restore-conf="restore-defaults"
