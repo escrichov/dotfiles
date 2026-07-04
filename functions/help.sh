@@ -96,6 +96,18 @@ function dotpick {
         | sort -t"$(printf '\t')" -k1,1 -k3,3 \
         | fzf --delimiter='\t' --with-nth='1,2,3,4' \
               --preview="$prev" --preview-window='right,60%,border-left' \
-              --header='Funciones / aliases / scripts de los dotfiles')
-    [ -n "$sel" ] && printf '%s\n' "$sel" | awk -F'\t' '{ print $3" — "$4 }'
+              --header='Enter: escribe el comando en el prompt listo para ejecutar')
+    [ -z "$sel" ] && return
+
+    local name
+    name=$(printf '%s\n' "$sel" | awk -F'\t' '{ print $3 }')
+    if [ -n "$ZSH_VERSION" ]; then
+        # zsh: deja el comando escrito en la linea de comandos (pulsa Enter)
+        print -z "$name"
+    elif command -v pbcopy >/dev/null 2>&1; then
+        printf '%s' "$name" | pbcopy
+        echo "Copiado al portapapeles: $name"
+    else
+        echo "$name"
+    fi
 }
