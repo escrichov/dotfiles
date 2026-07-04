@@ -155,8 +155,11 @@ function update() {
 	# Ruby viejo/EOL casi todas las gemas fallan y algunas lanzan prompts
 	# interactivos que cuelgan el update.
 	if ruby -e 'exit(Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.2.0"))' 2>/dev/null; then
-		gem update --system --no-document
-		gem update --no-document
+		# '< /dev/null' para que un conflicto (p.ej. el binario 'rackup' de
+		# rack vs rackup) no lance un prompt que cuelgue el update: al no haber
+		# stdin, se toma la opcion por defecto (no sobreescribir).
+		gem update --system --no-document < /dev/null
+		gem update --no-document < /dev/null
 	else
 		echo "gems: saltado (Ruby $(ruby -v 2>/dev/null | awk '{print $2}') es viejo)."
 		echo "      Actualiza con: rbenv install 3.4.10 && rbenv global 3.4.10"
