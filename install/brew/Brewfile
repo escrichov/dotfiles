@@ -121,7 +121,6 @@ cask 'docker-desktop' # Docker Desktop (el cask 'docker' quedo como stub vacio)
 cask 'sublime-text'
 cask 'dash' # Software API documentation
 cask 'unity'
-cask 'postgres-unofficial'
 cask 'dotnet-sdk' # SDK .NET (el cask 'dotnet' quedo como stub vacio; el SDK incluye runtime)
 cask 'iina'
 cask 'transmission'
