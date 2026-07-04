@@ -62,6 +62,7 @@ function reload() {
 }
 
 
+# update-apps: actualiza las apps de la App Store (mas) y Homebrew.
 function update-apps() {
 	# Update App Store apps
 	mas upgrade
@@ -71,6 +72,7 @@ function update-apps() {
 	brew upgrade
 }
 
+# update-mac: actualiza macOS (solo lo que NO es del SO) y luego las apps.
 function update-mac() {
 	# Instala solo las actualizaciones que NO son del sistema operativo
 	# (Command Line Tools, Safari, etc.). Las actualizaciones de macOS en si
@@ -130,6 +132,7 @@ function update-macos() {
 	sudo softwareupdate -i "${args[@]}" --restart
 }
 
+# update: actualiza todo (macOS no-SO, apps, brew, npm, gem, pipx, rustup, omz).
 function update() {
 	# 'update' solo pide sudo si hay actualizaciones de macOS que instalar
 	# (ver update-mac). Todo lo demas (brew, mas, npm, gem, pipx, rustup, omz)
