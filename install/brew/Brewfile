@@ -130,6 +130,15 @@ cask 'tunnelblick'
 cask 'appcleaner'
 cask 'http-toolkit' # (es cask, no formula)
 cask 'swiftbar' # Menubar plugins (homelab plugin)
+cask 'arc' # Navegador Arc
+cask 'cursor' # Editor con IA
+cask 'warp' # Terminal
+cask 'cloudflare-warp' # VPN/DNS de Cloudflare
+cask 'rescuetime' # Seguimiento de tiempo
+cask 'raspberry-pi-imager' # Grabar imagenes de Raspberry Pi
+cask 'android-studio' # IDE Android
+cask 'jetbrains-gateway' # Desarrollo remoto JetBrains
+cask 'postgres-app' # PostgreSQL.app (postgresapp.com)
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
@@ -142,3 +151,9 @@ mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
 mas 'Encrypto: Secure Your Files', id: 935235287
 mas 'Pixelmator Pro', id: 1289583905
+mas 'CopyLess 2', id: 993841014
+mas 'Developer', id: 640199958 # Apple Developer
+mas 'Tailscale', id: 1475387142
+mas 'WhatsApp', id: 310633997
+mas 'Windows App', id: 1295203466
+mas 'WireGuard', id: 1451685025
