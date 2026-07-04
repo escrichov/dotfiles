@@ -158,42 +158,54 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseHorizontalSc
 
 echo "Setting Trackpad preferences"
 
+# Aplica cada ajuste al trackpad INTERNO del MacBook (AppleMultitouchTrackpad)
+# y al Magic Trackpad externo (Bluetooth), que comparten las mismas claves.
+# Antes solo se escribía el dominio Bluetooth, así que no aplicaba al integrado.
+trackpad_write() {
+    local key="$1"; shift
+    defaults write com.apple.AppleMultitouchTrackpad "$key" "$@"
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "$key" "$@"
+}
+
 # Tap to click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+trackpad_write Clicking -bool true
+# Necesario además en NSGlobalDomain para que "tap to click" aplique de verdad
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Tap with two fingers to emulate right click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+trackpad_write TrackpadRightClick -bool true
 
 # Enable three finger tap (look up)
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 2
+trackpad_write TrackpadThreeFingerTapGesture -int 2
 
 # Disable three finger drag
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool false
+trackpad_write TrackpadThreeFingerDrag -bool false
 
 # Zoom in or out
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -bool true
+trackpad_write TrackpadPinch -bool true
 
 # Smart zoom, double-tap with two fingers
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -bool true
+trackpad_write TrackpadTwoFingerDoubleTapGesture -bool true
 
 # Rotate
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -bool true
+trackpad_write TrackpadRotate -bool true
 
 # Notification Center
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+trackpad_write TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
 
 # Swipe between pages with two fingers
 defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
 
 # Swipe between full-screen apps
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+trackpad_write TrackpadThreeFingerHorizSwipeGesture -int 2
 
 # Enable other multi-finger gestures
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerPinchGesture -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFiveFingerPinchGesture -int 2
+trackpad_write TrackpadThreeFingerVertSwipeGesture -int 2
+trackpad_write TrackpadFourFingerVertSwipeGesture -int 2
+trackpad_write TrackpadFourFingerPinchGesture -int 2
+trackpad_write TrackpadFourFingerHorizSwipeGesture -int 2
+trackpad_write TrackpadFiveFingerPinchGesture -int 2
 
 defaults write com.apple.dock showMissionControlGestureEnabled -bool true
 defaults write com.apple.dock showAppExposeGestureEnabled -bool true
