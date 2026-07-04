@@ -1,9 +1,6 @@
 cask_args appdir: '/Applications'
 
-tap 'homebrew/bundle'
 tap 'heroku/brew'
-tap 'homebrew/cask'
-tap 'homebrew/cask-drivers' # Logitech options
 
 # Libraries & Utilities
 brew 'stow' # for nokogiri
@@ -15,10 +12,9 @@ brew 'openssl'
 brew 'rbenv' # Ruby installation
 brew 'ruby-build' # Ruby installation
 brew 'wget'
-brew 'youtube-dl'
+brew 'yt-dlp' # (reemplaza a youtube-dl, abandonado)
 brew 'awscli'
 brew 'curl'
-brew 'docker'
 brew 'elixir'
 brew 'erlang'
 brew 'ffmpeg'
@@ -31,7 +27,7 @@ brew 'python'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 brew 'redis'
-brew 'postgresql'
+brew 'postgresql@16' # (la formula sin versión fue renombrada)
 #brew 'rmtrash'
 #brew 'rust'
 brew 's3cmd'
@@ -40,8 +36,7 @@ brew 'upx'
 brew 'vim'
 brew 'watch'
 brew 'zsh'
-brew 'node'
-brew 'npm'
+brew 'node' # (npm viene incluido con node)
 brew 'mas' # Homebrew support Mac App Store
 brew 'subliminal' # Subtitles downloader
 brew 'arp-scan'
@@ -77,9 +72,8 @@ brew 'k6'
 brew 'hey'
 brew 'nakabonne/ali/ali'
 brew 'bat'
-brew 'mailhog'
-brew 'http-toolkit'
-brew 'exa'
+brew 'mailpit' # (reemplaza a mailhog, deprecado)
+brew 'eza' # (reemplaza a exa, abandonado)
 brew 'dog'
 brew 'navi'
 brew 'nvm'
@@ -93,7 +87,7 @@ cask 'slack'
 cask 'postico'
 cask 'postman'
 cask 'sketch'
-cask 'sequel-pro'
+cask 'sequel-ace' # (reemplaza a sequel-pro, abandonado)
 cask 'calibre'
 cask 'dropbox'
 cask 'iterm2'
@@ -116,9 +110,8 @@ cask 'imageoptim' # Optimize jpeg images
 cask 'imagealpha' # Optimize png images
 cask 'mactex' # LaTeX for Mac
 cask 'visual-studio-code'
-cask 'logitech-options' # Logitech Mx Master
+cask 'logi-options-plus' # Logitech Mx Master (reemplaza a logitech-options, discontinuada)
 cask 'balenaetcher' # Flash usb and SD Cards
-cask 'chromedriver'
 cask 'anaconda'
 cask 'poedit'
 cask 'anki'
@@ -132,8 +125,8 @@ cask 'dotnet'
 cask 'iina'
 cask 'transmission'
 cask 'tunnelblick'
-cask 'skype'
 cask 'appcleaner'
+cask 'http-toolkit' # (es cask, no formula)
 cask 'swiftbar' # Menubar plugins (homelab plugin)
 
 # Mac App Store Applications
@@ -142,7 +135,6 @@ mas 'Pages', id: 409201541
 mas 'Keynote', id: 409183694
 mas 'Numbers', id: 409203825
 mas 'iMovie', id: 408981434
-mas 'Pocket', id: 568494494
 mas 'LastPass', id: 926036361
 mas 'Todoist: Organize your life', id: 585829637
 mas 'Magnet', id: 441258766
