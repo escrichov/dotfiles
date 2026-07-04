@@ -118,7 +118,6 @@ cask 'anaconda'
 cask 'poedit'
 cask 'anki'
 cask 'docker-desktop' # Docker Desktop (el cask 'docker' quedo como stub vacio)
-cask 'darktable'
 cask 'sublime-text'
 cask 'dash' # Software API documentation
 cask 'unity'

@@ -13,6 +13,11 @@ export PIP_REQUIRE_VIRTUALENV=true
 export BREW_PATH=/opt/homebrew
 export PATH=$BREW_PATH/bin:$PATH
 
+# Homebrew: no intentar actualizar los casks que se auto-actualizan solos
+# (evita los avisos "cannot be upgraded as-is") y oculta los hints de entorno.
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+export HOMEBREW_NO_ENV_HINTS=1
+
 # Pipx to path
 export PIPX_BIN_PATH=$HOME/.local/bin
 export PATH=$PATH:$PIPX_BIN_PATH
