@@ -92,9 +92,10 @@ function update() {
 	gem update --system
 	gem update
 
-	# Upgrade poetry
-	pipx upgrade poetry
+	# Upgrade all pipx packages (poetry, whisper, ...)
+	pipx upgrade-all
 
-    # Upgrade rustup
-    rustup upgrade
+	# Update Rust toolchains and rustup itself
+	rustup update
+	rustup self update
 }
