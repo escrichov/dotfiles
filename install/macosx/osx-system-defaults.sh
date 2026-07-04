@@ -36,18 +36,22 @@ fi
 # ==============================================
 # Application layer firewall
 # ==============================================
+# En macOS moderno el firewall lo gestiona socketfilterfw; escribir el plist
+# com.apple.alf directamente ya no surte efecto. Este script corre con sudo.
+SOCKETFILTERFW="/usr/libexec/ApplicationFirewall/socketfilterfw"
 
-# Enable ALF
-defaults write com.apple.alf globalstate -int 1
+# Enable firewall
+"$SOCKETFILTERFW" --setglobalstate on
 
-# Allow signed apps
-defaults write com.apple.alf allowsignedenabled -bool true
+# Allow built-in and downloaded signed apps to receive connections
+"$SOCKETFILTERFW" --setallowsigned on
+"$SOCKETFILTERFW" --setallowsignedapp on
 
 # Enable logging
-defaults write com.apple.alf loggingenabled -bool true
+"$SOCKETFILTERFW" --setloggingmode on
 
-# Disable stealth mode
-defaults write com.apple.alf stealthenabled -bool false
+# Enable stealth mode (don't respond to pings / port scans)
+"$SOCKETFILTERFW" --setstealthmode on
 
 
 # ==============================================
