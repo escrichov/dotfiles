@@ -143,8 +143,9 @@ function update() {
 	# para acelerar el arranque, asi que se actualiza aqui a mano)
 	command -v omz >/dev/null 2>&1 && omz update
 
-	# Update pip & virtualenv
-	gpip install --upgrade pip virtualenv
+	# (pip/virtualenv ya no se actualizan aqui: el Python de Homebrew es
+	# "externally-managed" (PEP 668) y 'pip install' global falla; pip viene
+	# con el Python y virtualenv esta en el Brewfile.)
 
 	# Update npm & packages
 	npm install -g npm
