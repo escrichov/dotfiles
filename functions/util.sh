@@ -71,9 +71,11 @@ function update-apps() {
 	brew update
 	brew upgrade
 
-	# Limpia binarios/descargas viejas: 'brew upgrade' las acumula y la cache
-	# puede crecer a decenas de GB (-s = borra tambien la cache de descargas).
-	brew cleanup -s
+	# Limpia binarios/descargas: 'brew upgrade' las acumula y la cache puede
+	# crecer a decenas de GB. '-s' borra versiones viejas; '--prune=all' borra
+	# TODAS las descargas (son regenerables: brew las re-baja si hiciera falta),
+	# asi la cache no vuelve a inflarse tras actualizar instaladores gordos.
+	brew cleanup -s --prune=all
 }
 
 # update-macos: instala la actualizacion del propio macOS (separada de 'update'
