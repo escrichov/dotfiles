@@ -117,7 +117,7 @@ cask 'balenaetcher' # Flash usb and SD Cards
 cask 'anaconda'
 cask 'poedit'
 cask 'anki'
-cask 'docker'
+cask 'docker-desktop' # Docker Desktop (el cask 'docker' quedo como stub vacio)
 cask 'darktable'
 cask 'sublime-text'
 cask 'dash' # Software API documentation
@@ -150,6 +150,9 @@ cask 'remote-desktop-manager' # Gestor de conexiones remotas
 cask 'unity-hub' # Gestor de versiones de Unity
 cask 'ha-menu' # Home Assistant en la barra de menu
 cask 'macdown' # Editor Markdown
+cask 'telegram' # Mensajeria
+cask 'ngrok' # Tuneles a localhost
+cask 'rustrover' # IDE Rust de JetBrains
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
