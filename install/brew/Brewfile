@@ -78,6 +78,11 @@ brew 'navi'
 brew 'nvm'
 brew 'wakeonlan' # For the homelab SwiftBar plugin (Wake on LAN)
 brew 'terminal-notifier' # Notifications for the homelab SwiftBar plugin
+# Optimizacion de imagenes por CLI (reemplazan a imageoptim-cli, abandonado)
+brew 'oxipng' # PNG lossless (rapido, multihilo)
+brew 'jpegoptim' # JPEG
+brew 'pngquant' # PNG lossy (equivale a ImageAlpha)
+brew 'gifsicle' # GIF
 
 # Applications
 cask 'google-chrome'

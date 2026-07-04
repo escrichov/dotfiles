@@ -25,7 +25,6 @@
 
 packages=(
     http-server
-	imageoptim-cli
 )
 
 npm install -g "${packages[@]}"
