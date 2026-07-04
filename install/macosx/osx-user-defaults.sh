@@ -41,7 +41,7 @@ defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # 24-Hour Time
-defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 
 # Turn off text smoothing for font sizes
 defaults write NSGlobalDomain AppleAntiAliasingThreshold -int 4
@@ -59,8 +59,11 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 2
 
 # Keyboard layout: Spanish - ISO (dominio de usuario)
-# Borra el layout por defecto (US); no falla si la clave no existe
+# Borra los arrays antes de re-añadir para no acumular duplicados en cada
+# ejecución (idempotencia); no falla si las claves no existen.
 defaults delete com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null || true
+defaults delete com.apple.HIToolbox AppleInputSourceHistory 2>/dev/null || true
+defaults delete com.apple.HIToolbox AppleSelectedInputSources 2>/dev/null || true
 defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.Spanish-ISO"
 defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 87 "KeyboardLayout Name" "Spanish - ISO"
 defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
@@ -113,8 +116,8 @@ defaults write NSGlobalDomain "AppleEnableMenuBarTransparency" -bool false
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 5
 
-# Screen Saver: Flurry
-defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Flurry" path -string "/System/Library/Screen Savers/Flurry.saver" type -int 0
+# (El salvapantallas "Flurry" fue eliminado de macOS y el mecanismo moduleDict
+# está obsoleto; se ha quitado para no dejar una ruta .saver inexistente.)
 
 # Hot corners -> bottom left -> start screen saver
 defaults write com.apple.dock "wvous-bl-corner" -int 5
@@ -317,7 +320,7 @@ defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict acti
 echo "Setting Archive Utility preferences"
 
 # Move archives to trash after extraction
-defaults write com.apple.archiveutility "dearchive-move-after" -string "~/.Trash"
+defaults write com.apple.archiveutility "dearchive-move-after" -string "${HOME}/.Trash"
 
 # Don't reveal extracted items
 defaults write com.apple.archiveutility "dearchive-reveal-after" -bool false
@@ -407,21 +410,21 @@ function killallApps() {
     #killall "Dock" > /dev/null 2>&1
 
 
+    # "Dashboard" y "System Preferences" ya no existen en macOS moderno
+    # (Preferencias del Sistema pasó a llamarse "System Settings").
     appsToKill=(
     "Activity Monitor"
     "Calendar"
     "Contacts"
-    "Dashboard"
     "Disk Utility"
-    "System Preferences"
+    "System Settings"
     "Xcode"
     )
 
     for app in "${appsToKill[@]}"
     do
-        killall "${app}" > /dev/null 2>&1
-        if [[ $? -eq 0 ]]; then
-            # We just killed an app so restart it
+        # Reinicia la app solo si estaba abierta (killall devuelve 0)
+        if killall "${app}" > /dev/null 2>&1; then
             open -a "${app}"
         fi
     done

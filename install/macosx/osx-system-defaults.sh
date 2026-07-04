@@ -14,21 +14,26 @@
 # Date & Time
 # ==============================================
 
-/usr/sbin/systemsetup -settimezone "Europe/Madrid"
-/usr/sbin/systemsetup -setnetworktimeserver "time.euro.apple.com"
-/usr/sbin/systemsetup -setusingnetworktime on
+# systemsetup requiere que la Terminal tenga Full Disk Access; si no lo tiene
+# imprime error y devuelve !=0 (no aborta porque el script no usa set -e).
+/usr/sbin/systemsetup -settimezone "Europe/Madrid" || true
+/usr/sbin/systemsetup -setnetworktimeserver "time.apple.com" || true
+/usr/sbin/systemsetup -setusingnetworktime on || true
 
 
 # ==============================================
 # Set energy preferences
 # ==============================================
 
-# From <https://github.com/rtrouton/rtrouton_scripts/>
-IS_LAPTOP=`/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"`
-if [[ "$IS_LAPTOP" != "" ]]; then
+# Detecta portátil por la presencia de batería interna (el antiguo grep
+# "Book" sobre "Model Identifier" ya no funciona: los Mac Apple Silicon usan
+# identificadores tipo "Mac14,7" sin "Book").
+if pmset -g batt 2>/dev/null | grep -q "InternalBattery"; then
+    # Portátil: en batería duerme antes; en corriente no duerme
     pmset -b sleep 15 disksleep 10 displaysleep 5 halfdim 1
     pmset -c sleep 0 disksleep 0 displaysleep 30 halfdim 1
 else
+    # Sobremesa
     pmset sleep 0 disksleep 0 displaysleep 30 halfdim 1
 fi
 
@@ -54,36 +59,28 @@ SOCKETFILTERFW="/usr/libexec/ApplicationFirewall/socketfilterfw"
 "$SOCKETFILTERFW" --setstealthmode on
 
 
-# ==============================================
-# Ambient light sensor
-# ==============================================
-
-# Display -> Automatically adjust brightness
-defaults write com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool true
-
-# Keyboard -> Adjust keyboard brightness in low light
-defaults write com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
-defaults write com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
+# NOTA: el brillo automático (com.apple.iokit.AmbientLightSensor) hoy lo
+# gestiona CoreBrightness y no es ajustable por 'defaults'; se ha eliminado.
 
 
 # ==============================================
 # Login window
 # ==============================================
+# Son ajustes a nivel de sistema: hay que escribir en /Library/Preferences,
+# no en el dominio de root (que es donde iría con 'defaults write com.apple...'
+# al correr con sudo, y no surtiría efecto).
 
 # Display login window as: Name and password
-defaults write com.apple.loginwindow SHOWFULLNAME -bool false
+defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool false
 
 # Show shut down etc. buttons
-defaults write com.apple.loginwindow PowerOffDisabled -bool false
+defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
 
 # Don't show any password hints
-defaults write com.apple.loginwindow RetriesUntilHint -int 0
+defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
 # Don't allow fast user switching
-defaults write .GlobalPreferences MultipleSessionEnabled -bool false
-
-# Hide users with UID under 500
-defaults write com.apple.loginwindow Hide500Users -bool YES
+defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool false
 
 
 # NOTA: las preferencias de teclado (layout Spanish-ISO, key repeat, scroll)
@@ -95,32 +92,22 @@ defaults write com.apple.loginwindow Hide500Users -bool YES
 # Time Machine
 # ==============================================
 
-# Don't offer new disks for backup
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+# Don't offer new disks for backup (dominio de sistema -> ruta completa)
+defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true 2>/dev/null || true
 
 
 # ==============================================
 # Make links to useful apps
 # ==============================================
+# Solo se crea el enlace si el origen existe (en macOS reciente algunas de
+# estas apps se han movido/eliminado -> evita symlinks colgantes).
 
-# Archive Utility
-if [ ! -L "/Applications/Utilities/Archive Utility.app" ]; then
-	ln -s "/System/Library/CoreServices/Archive Utility.app" "/Applications/Utilities/Archive Utility.app"
-fi
-
-# Directory Utility
-if [ ! -L "/Applications/Utilities/Directory Utility.app" ]; then
-	ln -s "/System/Library/CoreServices/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
-fi
-
-# Screen Sharing
-if [ ! -L "/Applications/Utilities/Screen Sharing.app" ]; then
-	ln -s "/System/Library/CoreServices/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
-fi
-
-# Ticket Viewer
-if [ ! -L "/Applications/Utilities/Ticket Viewer.app" ]; then
-	ln -s "/System/Library/CoreServices/Ticket Viewer.app" "/Applications/Utilities/Ticket Viewer.app"
-fi
+for app in "Archive Utility" "Directory Utility" "Screen Sharing" "Ticket Viewer"; do
+	src="/System/Library/CoreServices/$app.app"
+	dst="/Applications/Utilities/$app.app"
+	if [ -e "$src" ] && [ ! -e "$dst" ]; then
+		ln -s "$src" "$dst" || true
+	fi
+done
 
 echo "Done. Note that these changes require a restart to take effect."
