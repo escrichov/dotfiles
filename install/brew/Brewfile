@@ -139,6 +139,17 @@ cask 'raspberry-pi-imager' # Grabar imagenes de Raspberry Pi
 cask 'android-studio' # IDE Android
 cask 'jetbrains-gateway' # Desarrollo remoto JetBrains
 cask 'postgres-app' # PostgreSQL.app (postgresapp.com)
+cask 'cyberduck' # Cliente FTP/SFTP/S3
+cask 'firefox' # Navegador Firefox
+cask 'zoom' # Videollamadas
+cask 'microsoft-teams' # Videollamadas/chat
+cask 'anydesk' # Escritorio remoto
+cask 'wireshark' # Analizador de red
+cask 'autofirma' # Firma electronica (Gobierno de Espana)
+cask 'remote-desktop-manager' # Gestor de conexiones remotas
+cask 'unity-hub' # Gestor de versiones de Unity
+cask 'ha-menu' # Home Assistant en la barra de menu
+cask 'macdown' # Editor Markdown
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
