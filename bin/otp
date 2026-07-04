@@ -1,20 +1,34 @@
 #!/usr/bin/env bash
 
-if [ -z $1 ]; then
+OTPFILE="$HOME/.otpkeys"
+
+if [ -z "${1:-}" ]; then
   echo
   echo "Usage:"
   echo "   otp google"
   echo
-  echo "Configuration: $HOME/.otpkeys"
+  echo "Configuration: $OTPFILE"
   echo "Format: name=key"
-  exit
+  exit 0
 fi
 
-OTPKEY=$(sed -n "s/${1}=//p" $HOME/.otpkeys)
-if [ -z $OTPKEY ]; then
-  echo "$(basename $0): Bad Service Name '$1'"
-  $0
-  exit
+if [ ! -f "$OTPFILE" ]; then
+  echo "$(basename "$0"): no existe $OTPFILE" >&2
+  exit 1
 fi
 
-oathtool --totp -b $OTPKEY
+# Aviso si el fichero de secretos es legible por otros (deberían ser 600)
+perms=$(stat -f '%Lp' "$OTPFILE" 2>/dev/null || true)
+if [ -n "$perms" ] && [ "$perms" != "600" ]; then
+  echo "AVISO: $OTPFILE tiene permisos $perms; usa: chmod 600 \"$OTPFILE\"" >&2
+fi
+
+# Match anclado al principio de línea para no coger un nombre parcial
+# (p.ej. 'otp goog' no debe devolver la clave de 'google')
+OTPKEY=$(sed -n "s/^${1}=//p" "$OTPFILE")
+if [ -z "$OTPKEY" ]; then
+  echo "$(basename "$0"): Bad Service Name '$1'" >&2
+  exit 1
+fi
+
+oathtool --totp -b "$OTPKEY"

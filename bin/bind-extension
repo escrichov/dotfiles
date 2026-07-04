@@ -16,9 +16,9 @@ function usage {
 BUNDLE_ID=$(osascript -e "id of app \"$APP\"")
 RETURN_CODE=$?
 
-if [ "$RETURN_CODE" = "1" ]; then
+if [ "$RETURN_CODE" -ne 0 ] || [ -z "$BUNDLE_ID" ]; then
     echo "App $APP not found"
-    exit $RETURN_CODE
+    exit 1
 fi
 
 duti -s "$BUNDLE_ID" "$EXTENSION" all

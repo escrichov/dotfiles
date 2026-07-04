@@ -24,8 +24,8 @@ if [[ ! $COMMAND_NAME ]] || [[ $COMMAND_NAME = "help" ]] || [[ $COMMAND_NAME = "
 fi
 
 if [[ "$COMMAND_NAME" = "list" ]]; then
-	$BIN_NAME list-keys
-	$BIN_NAME list-host
+	"$0" list-keys
+	"$0" list-host
 fi
 
 if [[ $COMMAND_NAME = "list-keys" ]]; then
@@ -33,14 +33,15 @@ if [[ $COMMAND_NAME = "list-keys" ]]; then
 
 	for file in ~/.ssh/*.pub
 	do
-	    echo "- "${file##*/}
+	    [ -e "$file" ] || continue
+	    echo "- ${file##*/}"
 	done
 fi
 
 if [[ $COMMAND_NAME = "list-host" ]]; then
 	echo -e "${YELLOW}$ARROW List of available hosts in SSH config:${NC}"
 
-	awk '/host (.*)/ { print "- "$2 }' ~/.ssh/config
+	awk 'tolower($1)=="host" { print "- "$2 }' ~/.ssh/config
 fi
 
 if [[ $COMMAND_NAME = "copy" ]]; then
@@ -112,7 +113,7 @@ if [[ $COMMAND_NAME = "host" ]]; then
 	user=${user:-"root"}
 
 	if [[ $2 ]] && [[ $2 = "--key" ]]; then
-		$BIN_NAME new --save
+		"$0" new --save
 		key="$(cat ~/.ssh/key_name.tmp)"
 		rm ~/.ssh/key_name.tmp
 	else
@@ -134,8 +135,7 @@ if [[ $COMMAND_NAME = "host" ]]; then
 	read -p "$(echo -e "${YELLOW}$ARROW Would you like to transfer public key id_ed25519_$key.pub to server $host ($shortname)? (y|n): ${NC} ")" transfer
 
 	if [[ $transfer = "y" ]] || [[ $transfer = "yes" ]]; then
-		publicKey="$(cat ~/.ssh/id_ed25519_$key.pub)"
-		ssh $shortname "mkdir -p ~/.ssh; echo $publicKey >> ~/.ssh/authorized_keys;"
+		ssh-copy-id -i ~/.ssh/id_ed25519_"$key".pub "$shortname"
 		echo -e "${GREEN}$ARROW Success: Public key id_ed25519_$key.pub was successfully transfered to the server.${NC}"
 	fi
 
@@ -157,7 +157,7 @@ if [[ $COMMAND_NAME = "remove" ]]; then
 		fi
 	done
 
-	sed -ie "/^host $shortname$/,/^$/d" ~/.ssh/config
+	sed -i '' "/^host $shortname$/,/^$/d" ~/.ssh/config
 
 	echo -e "${GREEN}$ARROW Success: SSH host '$shortname' was successfully remove from SSH config.${NC}"
 fi
