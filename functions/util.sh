@@ -81,6 +81,10 @@ function update-mac() {
 function update() {
 	update-mac
 
+	# Update oh-my-zsh (su auto-update automatico esta desactivado en .zshrc
+	# para acelerar el arranque, asi que se actualiza aqui a mano)
+	command -v omz >/dev/null 2>&1 && omz update
+
 	# Update pip & virtualenv
 	gpip install --upgrade pip virtualenv
 
