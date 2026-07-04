@@ -111,3 +111,6 @@ function dotpick {
         echo "$name"
     fi
 }
+
+# Atajo comodo: `help` lista el catalogo (el ayuda nativo de zsh es run-help).
+alias help='dothelp'
