@@ -12,10 +12,9 @@
 
 
 function CFPreferencesAppSynchronize() {
-    /usr/bin/python - <<END
-from Foundation import CFPreferencesAppSynchronize
-CFPreferencesAppSynchronize('$1')
-END
+    # Los 'defaults write' modernos ya persisten vía cfprefsd; PyObjC/Foundation
+    # con /usr/bin/python (Python 2) ya no existe en macOS actual. No-op.
+    :
 }
 
 # ==============================================
@@ -58,6 +57,15 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 2
+
+# Keyboard layout: Spanish - ISO (dominio de usuario)
+# Borra el layout por defecto (US); no falla si la clave no existe
+defaults delete com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null || true
+defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.Spanish-ISO"
+defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 87 "KeyboardLayout Name" "Spanish - ISO"
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
+defaults write com.apple.HIToolbox AppleInputSourceHistory -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
+defaults write com.apple.HIToolbox AppleSelectedInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
 
 # Don't restore windows when quitting or re-opening apps
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false

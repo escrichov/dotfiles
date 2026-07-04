@@ -82,28 +82,9 @@ defaults write .GlobalPreferences MultipleSessionEnabled -bool false
 defaults write com.apple.loginwindow Hide500Users -bool YES
 
 
-# ==============================================
-# Set keyboard preferences
-# ==============================================
-# Delete the default layouts (US)
-defaults delete com.apple.HIToolbox AppleEnabledInputSources
-
-defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.Spanish-ISO"
-defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 87 "KeyboardLayout Name" "Spanish - ISO"
-
-# Enable Spanish layout
-defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
-defaults write com.apple.HIToolbox AppleInputSourceHistory -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
-defaults write com.apple.HIToolbox AppleSelectedInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>87</integer><key>KeyboardLayout Name</key><string>Spanish - ISO</string></dict>'
-
-# Enable key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool FALSE
-
-# Set keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 2
-
-# Set scroll direction
-defaults write .GlobalPreferences com.apple.swipescrolldirection -bool false
+# NOTA: las preferencias de teclado (layout Spanish-ISO, key repeat, scroll)
+# son del dominio del USUARIO. Este script corre con sudo (dominio de root),
+# así que se han movido a osx-user-defaults.sh para que apliquen de verdad.
 
 
 # ==============================================
