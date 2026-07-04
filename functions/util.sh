@@ -70,6 +70,10 @@ function update-apps() {
 	# Update Homebrew (Cask) & packages
 	brew update
 	brew upgrade
+
+	# Limpia binarios/descargas viejas: 'brew upgrade' las acumula y la cache
+	# puede crecer a decenas de GB (-s = borra tambien la cache de descargas).
+	brew cleanup -s
 }
 
 # update-macos: instala la actualizacion del propio macOS (separada de 'update'
@@ -146,9 +150,16 @@ function update() {
 	npm install -g npm
 	npm update -g
 
-	# Update Ruby & gems
-	gem update --system
-	gem update
+	# Update Ruby & gems SOLO si el Ruby activo es reciente (>= 3.2). Con un
+	# Ruby viejo/EOL casi todas las gemas fallan y algunas lanzan prompts
+	# interactivos que cuelgan el update.
+	if ruby -e 'exit(Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.2.0"))' 2>/dev/null; then
+		gem update --system --no-document
+		gem update --no-document
+	else
+		echo "gems: saltado (Ruby $(ruby -v 2>/dev/null | awk '{print $2}') es viejo)."
+		echo "      Actualiza con: rbenv install 3.4.10 && rbenv global 3.4.10"
+	fi
 
 	# Upgrade all pipx packages (poetry, whisper, ...)
 	pipx upgrade-all
