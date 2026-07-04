@@ -72,14 +72,31 @@ function update-apps() {
 }
 
 function update-mac() {
-	# Actualiza macOS SOLO si hay algo que instalar, comprobandolo antes sin
-	# sudo (softwareupdate -l). Asi 'update' no pide la contrasena en vano
-	# cuando no hay actualizaciones del sistema, que es lo habitual.
-	if softwareupdate -l 2>&1 | grep -q "Label:"; then
-		echo "macOS: hay actualizaciones, instalando (requiere sudo)..."
-		sudo softwareupdate -i -a
+	# Instala solo las actualizaciones que NO son del sistema operativo
+	# (Command Line Tools, Safari, etc.). Las actualizaciones de macOS en si
+	# ("macOS Tahoe ...") son una descarga enorme y en Apple Silicon piden
+	# autenticacion varias veces (sudo + propietario del volumen para el
+	# reinicio), asi que se dejan para instalarlas a mano desde Ajustes.
+	local list labels
+	list=$(softwareupdate -l 2>&1)
+	labels=$(printf '%s\n' "$list" | sed -n 's/^\* Label: //p' | grep -vi '^macOS ')
+
+	if [ -n "$labels" ]; then
+		local -a args
+		while IFS= read -r label; do
+			[ -n "$label" ] && args+=("$label")
+		done <<< "$labels"
+		echo "macOS: instalando ${#args[@]} actualizacion(es) (requiere sudo):"
+		printf '  - %s\n' "${args[@]}"
+		sudo softwareupdate -i "${args[@]}"
 	else
-		echo "macOS: sin actualizaciones del sistema."
+		echo "macOS: sin actualizaciones (aparte del propio sistema)."
+	fi
+
+	# Aviso (sin instalar) si hay una actualizacion del SO pendiente
+	if printf '%s\n' "$list" | grep -qi '^\* Label: macOS '; then
+		echo "macOS: hay una actualizacion del SISTEMA pendiente. Instalala desde"
+		echo "       Ajustes del Sistema > General > Actualizacion de software (reinicia)."
 	fi
 
 	update-apps
