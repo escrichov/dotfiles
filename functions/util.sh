@@ -75,6 +75,9 @@ function update-apps() {
 # update-macos: instala la actualizacion del propio macOS (separada de 'update'
 # porque es una descarga grande, pide autenticacion varias veces y reinicia).
 function update-macos() {
+	[ -n "$ZSH_VERSION" ] && setopt local_traps
+	trap 'echo; echo "update-macos: cancelado."; return 130' INT
+
 	local list labels
 	list=$(softwareupdate -l 2>&1)
 	labels=$(printf '%s\n' "$list" | sed -n 's/^\* Label: //p' | grep -i '^macOS ')
@@ -102,6 +105,11 @@ function update-macos() {
 
 # update: actualiza todo (macOS no-SO, apps, brew, npm, gem, pipx, rustup, omz).
 function update() {
+	# Ctrl-C cancela TODO el update (antes solo cortaba el paso en curso y
+	# seguia con el siguiente).
+	[ -n "$ZSH_VERSION" ] && setopt local_traps
+	trap 'echo; echo "update: cancelado."; return 130' INT
+
 	# 1) Actualizaciones de macOS que NO son del sistema operativo (Command
 	# Line Tools, Safari...). Las del SO en si ("macOS Tahoe ...") van aparte
 	# con 'update-macos'. Solo se pide sudo si hay algo (no-SO) que instalar.
