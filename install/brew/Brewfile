@@ -83,6 +83,8 @@ brew 'exa'
 brew 'dog'
 brew 'navi'
 brew 'nvm'
+brew 'wakeonlan' # For the homelab SwiftBar plugin (Wake on LAN)
+brew 'terminal-notifier' # Notifications for the homelab SwiftBar plugin
 
 # Applications
 cask 'google-chrome'
@@ -132,6 +134,7 @@ cask 'transmission'
 cask 'tunnelblick'
 cask 'skype'
 cask 'appcleaner'
+cask 'swiftbar' # Menubar plugins (homelab plugin)
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835

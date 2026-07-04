@@ -4,5 +4,6 @@ environment/env_secret.sh
 dots/.ssh/config.d/*
 dots/.ssh/known_hosts
 !dots/.ssh/config.d/.gitkeep
+!dots/.ssh/config.d/local_pc.conf
 dots/.gitconfig.credentials
 dots/.ssh/id_rsa*
