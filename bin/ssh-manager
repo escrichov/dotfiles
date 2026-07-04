@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# ssh-manager: gestiona claves y hosts SSH (list/new/host/copy/remove).
 
 BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1

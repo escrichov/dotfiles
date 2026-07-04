@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# remux-directory: remuxea (sin recodificar) los videos de un directorio a mp4.
 
 import os
 import sys

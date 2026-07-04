@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# otp: genera codigos TOTP (2FA) a partir de ~/.otpkeys. Uso: otp <nombre>
 
 OTPFILE="$HOME/.otpkeys"
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# bind-extension: asocia una extension de archivo a una app por defecto (via duti).
 
 APP=$1
 EXTENSION=$2

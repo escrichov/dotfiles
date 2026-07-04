@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+# find-ip: busca la IP de un dispositivo en la LAN por su MAC (nmap ping-scan).
 function find-ip {
   MAC=$1
 

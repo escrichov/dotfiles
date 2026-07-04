@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# echo-colour: imprime texto en color. Uso: echo-colour <color> <texto>
 
 # Reset
 Color_Off='\033[0m'       # Text Reset
