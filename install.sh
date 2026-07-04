@@ -123,6 +123,24 @@ fi
     stow --target=$HOME --dir=$DOTFILES_DIRECTORY dots
 )
 
+# Install SwiftBar plugins
+# NOTE: copiamos el archivo (no symlink). Un symlink en esta carpeta hace que
+# algunas herramientas dejen directorios temporales vacíos al escribir sobre él.
+# swiftbar-plugins/ está en .gitignore (contiene IPs/MACs del homelab), así que
+# en un clon nuevo puede no existir: si falta, se salta sin romper la instalación.
+(
+    print_step "Installing SwiftBar plugins"
+    SWIFTBAR_PLUGINS_DIR="$HOME/Library/Application Support/SwiftBar/Plugins"
+    SWIFTBAR_PLUGIN_SRC="$DOTFILES_DIRECTORY/swiftbar-plugins/homelab.py"
+    if [ -f "$SWIFTBAR_PLUGIN_SRC" ]; then
+        mkdir -p "$SWIFTBAR_PLUGINS_DIR"
+        cp "$SWIFTBAR_PLUGIN_SRC" "$SWIFTBAR_PLUGINS_DIR/homelab.5s.py"
+        chmod +x "$SWIFTBAR_PLUGINS_DIR/homelab.5s.py"
+    else
+        print_step "SwiftBar plugin not found (swiftbar-plugins/ gitignored) - skipping"
+    fi
+)
+
 # NNN plugins
 (
     curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
