@@ -95,11 +95,39 @@ function update-mac() {
 
 	# Aviso (sin instalar) si hay una actualizacion del SO pendiente
 	if printf '%s\n' "$list" | grep -qi '^\* Label: macOS '; then
-		echo "macOS: hay una actualizacion del SISTEMA pendiente. Instalala desde"
-		echo "       Ajustes del Sistema > General > Actualizacion de software (reinicia)."
+		echo "macOS: hay una actualizacion del SISTEMA pendiente. Instalala con"
+		echo "       'update-macos' (reinicia el equipo) o desde Ajustes del Sistema."
 	fi
 
 	update-apps
+}
+
+# update-macos: instala la actualizacion del propio macOS (separada de 'update'
+# porque es una descarga grande, pide autenticacion varias veces y reinicia).
+function update-macos() {
+	local list labels
+	list=$(softwareupdate -l 2>&1)
+	labels=$(printf '%s\n' "$list" | sed -n 's/^\* Label: //p' | grep -i '^macOS ')
+	if [ -z "$labels" ]; then
+		echo "macOS: no hay actualizaciones del sistema."
+		return 0
+	fi
+
+	local -a args
+	while IFS= read -r label; do
+		[ -n "$label" ] && args+=("$label")
+	done <<< "$labels"
+
+	echo "Se instalara(n) y el equipo SE REINICIARA al terminar:"
+	printf '  - %s\n' "${args[@]}"
+	printf "¿Continuar? [y/N]: "
+	local ans; read -r ans
+	case "$ans" in
+		[yYsS]) ;;
+		*) echo "Cancelado."; return 1 ;;
+	esac
+
+	sudo softwareupdate -i "${args[@]}" --restart
 }
 
 function update() {
