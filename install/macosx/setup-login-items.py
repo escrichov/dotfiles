@@ -1,58 +1,66 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 """
 setup-login-items.py
 This script configures the Login items of current user
 """
 
-
+import os
 import subprocess
 import sys
 
 
+# Apps a añadir como login items (solo se añaden si están instaladas)
 loginItems = [
-    '{path: "/Applications/Dropbox.app", hidden:false}',
-    '{path: "/Applications/Magnet.app", hidden:false}',
-    '{path: "/Applications/CopyLess 2.app", hidden:false}',
+    "/Applications/Dropbox.app",
+    "/Applications/Magnet.app",
+    "/Applications/CopyLess 2.app",
 ]
+
+
+def run_osascript(script):
+    """Ejecuta un fragmento AppleScript y devuelve (returncode, stdout)."""
+    result = subprocess.run(
+        ["osascript", "-e", script],
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode, result.stdout.strip(), result.stderr.strip()
 
 
 # Remove all login items
 def remove_all_login_items():
-    all_login_items = ['osascript', '-e', 'tell application "System Events" to get the name of every login item']
-    p = subprocess.Popen(all_login_items, bufsize=1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (output, err) = p.communicate()
-    if err == "" and output != "":
-        output = output.strip()
-        if output != "":
-            current_login_items = output.split(',')
-            current_login_items = map(str.strip, current_login_items)
-        else:
-            current_login_items = []
-        for loginItem in current_login_items:
-            deleteItem = ['osascript', '-e', 'tell application "System Events" to delete login item "{}"'.format(loginItem)]
-            p = subprocess.Popen(deleteItem, bufsize=1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            (output, err) = p.communicate()
-            if err != "":
-                print(err)
-                return -1
-    else:
+    rc, output, err = run_osascript(
+        'tell application "System Events" to get the name of every login item'
+    )
+    if rc != 0:
         print(err)
         return -1
+
+    current_login_items = [i.strip() for i in output.split(",") if i.strip()]
+    for loginItem in current_login_items:
+        rc, _, err = run_osascript(
+            'tell application "System Events" to delete login item "{}"'.format(loginItem)
+        )
+        if rc != 0:
+            print(err)
+            return -1
 
     return 0
 
 
 # Create specified login items
 def create_login_items(login_items):
-    for item in login_items:
-        add_item = [
-            'osascript', '-e',
-            'tell application "System Events" to make login item at end with properties {item}'.format(item=item)
-        ]
-        p = subprocess.Popen(add_item, bufsize=1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        (output, err) = p.communicate()
-        if err != "":
+    for path in login_items:
+        if not os.path.exists(path):
+            print("Skipped (not installed): {}".format(path))
+            continue
+        script = (
+            'tell application "System Events" to make login item at end '
+            'with properties {{path: "{path}", hidden: false}}'.format(path=path)
+        )
+        rc, _, err = run_osascript(script)
+        if rc != 0:
             print(err)
             return -1
 

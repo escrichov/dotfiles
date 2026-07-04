@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 """
 setup-dock.py
@@ -7,15 +7,12 @@ way I like it. Use with caution...
 Hannes Juutilainen <hjuutilainen@mac.com>
 """
 
-from __future__ import print_function
 import sys
 import os
+import shutil
 import subprocess
 import plistlib
 import getpass
-
-
-from Foundation import CFPreferencesAppSynchronize
 
 # =======================================
 # Standard Applications
@@ -88,12 +85,10 @@ def restartDock():
     (output, err) = p.communicate()
 
 def dockutilExists():
-    whichProcess = ["which", "dockutil"]
-    p = subprocess.Popen(whichProcess, bufsize=1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (path, err) = p.communicate()
-    if os.path.exists(path.strip()):
+    path = shutil.which("dockutil")
+    if path:
         global dockutilPath
-        dockutilPath = path.strip()
+        dockutilPath = path
         return True
     else:
         return False
@@ -120,8 +115,8 @@ def localDisks():
     diskutilProcess = ["diskutil", "list", "-plist"]
     p = subprocess.Popen(diskutilProcess, bufsize=1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (output, err) = p.communicate()
-    if output != "":
-        outputPlist = plistlib.readPlistFromString(output)
+    if output:
+        outputPlist = plistlib.loads(output)
         return outputPlist['VolumesFromDisks']
     else:
         return None
@@ -205,11 +200,8 @@ def main(argv=None):
         
         # Add folders
         addFolders()
-        
-        # Write all pending changes to permanent storage
-        CFPreferencesAppSynchronize('com.apple.dock')
-        
-        # Restart Dock
+
+        # dockutil ya persiste los cambios en el plist; reiniciar el Dock los aplica
         restartDock()
 
     except Usage as err:

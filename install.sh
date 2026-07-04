@@ -2,7 +2,8 @@
 
 set -e
 
-DOTFILES_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# zsh no puebla BASH_SOURCE; ${0:A:h} = ruta absoluta del dir de este script
+DOTFILES_DIRECTORY="${0:A:h}"
 INSTALL_DIR=$DOTFILES_DIRECTORY/install
 CONFIG_FILE=$DOTFILES_DIRECTORY/config.sh
 ALL_ENVIRONMENT_FILE=$DOTFILES_DIRECTORY/env_all.sh
@@ -163,18 +164,20 @@ fi
 # Install rustup
 (
     print_step "Installing Rustup"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    if ! command -v rustup > /dev/null; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    fi
 )
 
 # Install poetry with pipx
 (
-    pipx install poetry
+    pipx install --force poetry
     poetry config virtualenvs.in-project true
 )
 
 # Install NVM Directory
 (
-    mkdir $HOME/.nvm
+    mkdir -p $HOME/.nvm
 )
 
 # Install Oh my ZSH
@@ -189,6 +192,7 @@ fi
 (
 	print_step "Installing Powerline Fonts"
 
+	/bin/rm -rf /tmp/fonts
 	git clone https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
 	cd /tmp/fonts
 	./install.sh
@@ -251,13 +255,13 @@ fi
     ./osx-user-defaults.sh
 
     print_step "Installing dock preferences"
-    /usr/bin/python setup-dock.py
+    python3 setup-dock.py
 
     print_step "Default login items"
-    /usr/bin/python setup-login-items.py
+    python3 setup-login-items.py
 
     print_step "Bind file extensions to apps"
-    /usr/bin/python file-extensions.py
+    python3 file-extensions.py
 )
 
 # Restore configuration of apps

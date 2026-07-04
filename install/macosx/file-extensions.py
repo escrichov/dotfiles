@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 import subprocess
@@ -8,7 +8,6 @@ app_extensions = [
     ("IINA", ".avi"),
     ("IINA", ".mp4"),
     ("IINA", ".mkv"),
-    ("IINA", ".avi"),
     ("IINA", ".mp3"),
     ("IINA", ".wav"),
     ("IINA", ".m4v"),
@@ -27,7 +26,6 @@ app_extensions = [
     ("TextMate", ".cs"),
     ("TextMate", ".java"),
     ("TextMate", ".sh"),
-    ("TextMate", ".java"),
     ("TextMate", ".php"),
     ("TextMate", ".js"),
     ("TextMate", ".py"),
@@ -49,12 +47,11 @@ app_extensions = [
     ("Preview", ".svg"),
     ("Preview", ".pdf"),
 
-    ("Unarchiver", ".tar.gz"),
-    ("Unarchiver", ".zip"),
-    ("Unarchiver", ".tar"),
-    ("Unarchiver", ".gz"),
-    ("Unarchiver", ".7z"),
-    ("Unarchiver", ".rar"),
+    ("The Unarchiver", ".zip"),
+    ("The Unarchiver", ".tar"),
+    ("The Unarchiver", ".gz"),
+    ("The Unarchiver", ".7z"),
+    ("The Unarchiver", ".rar"),
 
     ("calibre", ".epub"),
     ("calibre", ".mobi"),
