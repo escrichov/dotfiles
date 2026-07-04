@@ -60,10 +60,30 @@ export NNN_PLUG='p:preview-tui'
 export NNN_FIFO=/tmp/nnn.fifo
 export PAGER="less -R"
 
-# NVM
+# NVM (lazy-load): cargar nvm "eager" hacia un auto-use de Node que costaba
+# ~1.9s en cada arranque de shell. En su lugar dejamos la version por defecto
+# de Node en el PATH al instante, y nvm de verdad solo se carga la primera vez
+# que invocas `nvm` (para cambiar de version).
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+NVM_SH="/opt/homebrew/opt/nvm/nvm.sh"; [ -s "$NVM_SH" ] || NVM_SH="$NVM_DIR/nvm.sh"
+NVM_COMPLETION="/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+if [ -d "$NVM_DIR/versions/node" ]; then
+    _nvm_default=$(command cat "$NVM_DIR/alias/default" 2>/dev/null)
+    case "$_nvm_default" in
+        v[0-9]*) _nvm_ver="$_nvm_default" ;;
+        *)       _nvm_ver=$(command ls -1 "$NVM_DIR/versions/node" | sort -V | tail -1) ;;
+    esac
+    if [ -n "$_nvm_ver" ] && [ -d "$NVM_DIR/versions/node/$_nvm_ver/bin" ]; then
+        export PATH="$NVM_DIR/versions/node/$_nvm_ver/bin:$PATH"
+    fi
+    unset _nvm_default _nvm_ver
+fi
+nvm() {
+    unset -f nvm
+    [ -s "$NVM_SH" ] && \. "$NVM_SH"                       # carga nvm de verdad
+    [ -s "$NVM_COMPLETION" ] && \. "$NVM_COMPLETION"       # y su completion
+    nvm "$@"
+}
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
