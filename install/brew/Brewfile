@@ -1,6 +1,10 @@
 cask_args appdir: '/Applications'
 
 tap 'heroku/brew'
+tap 'ariga/tap' # atlas
+tap 'benbjohnson/litestream' # litestream
+tap 'codecrafters-io/tap' # codecrafters
+tap 'stripe/stripe-cli' # stripe
 
 # Libraries & Utilities
 brew 'stow' # for nokogiri
@@ -84,6 +88,10 @@ brew 'jpegoptim' # JPEG
 brew 'pngquant' # PNG lossy (equivale a ImageAlpha)
 brew 'gifsicle' # GIF
 brew 'fastlane' # Automatizacion de build/release iOS y Android
+brew 'ariga/tap/atlas' # Migraciones de esquema de base de datos
+brew 'benbjohnson/litestream/litestream' # Replica/backup de SQLite
+brew 'codecrafters-io/tap/codecrafters' # CLI de CodeCrafters
+brew 'stripe/stripe-cli/stripe' # CLI de Stripe
 
 # Applications
 cask 'google-chrome'
