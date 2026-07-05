@@ -83,6 +83,7 @@ brew 'oxipng' # PNG lossless (rapido, multihilo)
 brew 'jpegoptim' # JPEG
 brew 'pngquant' # PNG lossy (equivale a ImageAlpha)
 brew 'gifsicle' # GIF
+brew 'fastlane' # Automatizacion de build/release iOS y Android
 
 # Applications
 cask 'google-chrome'
