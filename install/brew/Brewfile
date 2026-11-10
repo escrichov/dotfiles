@@ -133,17 +133,10 @@ cask 'slack'
 cask 'postico'
 cask 'postman'
 cask 'sketch'
-cask 'sequel-ace' # (reemplaza a sequel-pro, abandonado)
 cask 'calibre'
 cask 'dropbox'
 cask 'iterm2'
-cask 'intellij-idea'
-cask 'clion'
 cask 'pycharm'
-cask 'phpstorm'
-cask 'rider'
-cask 'rubymine'
-cask 'webstorm'
 cask 'goland'
 cask 'spotify'
 cask 'superduper'
@@ -152,7 +145,6 @@ cask 'textmate'
 cask 'vlc'
 cask 'maintenance'
 cask 'basecamp'
-cask 'mactex' # LaTeX for Mac
 cask 'visual-studio-code'
 cask 'logi-options+' # Logitech Mx Master (reemplaza a logitech-options, discontinuada)
 cask 'balenaetcher' # Flash usb and SD Cards
@@ -179,7 +171,6 @@ cask 'postgres-app' # PostgreSQL.app (postgresapp.com)
 cask 'cyberduck' # Cliente FTP/SFTP/S3
 cask 'firefox' # Navegador Firefox
 cask 'zoom' # Videollamadas
-cask 'microsoft-teams' # Videollamadas/chat
 cask 'anydesk' # Escritorio remoto
 cask 'wireshark-app' # Analizador de red
 cask 'autofirma' # Firma electronica (Gobierno de Espana)
@@ -189,7 +180,6 @@ cask 'ha-menu' # Home Assistant en la barra de menu
 cask 'macdown' # Editor Markdown
 cask 'telegram' # Mensajeria
 cask 'ngrok' # Tuneles a localhost
-cask 'rustrover' # IDE Rust de JetBrains
 cask 'basecamp/tap/basecamp-cli' # CLI de Basecamp
 
 # Mac App Store Applications

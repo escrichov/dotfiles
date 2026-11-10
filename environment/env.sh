@@ -42,8 +42,6 @@ fi
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# MacTeX to path
-export PATH=$PATH:/Library/TeX/texbin
 
 # Golang environment (el binario go va en $BREW_PATH/bin; solo hace falta GOPATH/bin)
 export GOPATH=$HOME/go
