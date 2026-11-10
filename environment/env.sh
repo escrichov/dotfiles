@@ -13,6 +13,9 @@ export PIP_REQUIRE_VIRTUALENV=true
 export BREW_PATH=/opt/homebrew
 export PATH=$BREW_PATH/bin:$PATH
 
+# psql, pg_dump... de Postgres.app (la version que este marcada como 'latest')
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+
 # Homebrew: no intentar actualizar los casks que se auto-actualizan solos
 # (evita los avisos "cannot be upgraded as-is") y oculta los hints de entorno.
 export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1

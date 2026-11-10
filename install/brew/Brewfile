@@ -5,6 +5,7 @@ tap 'ariga/tap' # atlas
 tap 'benbjohnson/litestream' # litestream
 tap 'codecrafters-io/tap' # codecrafters
 tap 'stripe/stripe-cli' # stripe
+tap 'basecamp/tap' # basecamp-cli
 
 # Libraries & Utilities
 brew 'stow' # for nokogiri
@@ -31,7 +32,6 @@ brew 'python'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 brew 'redis'
-brew 'postgresql@16' # (la formula sin versión fue renombrada)
 #brew 'rmtrash'
 #brew 'rust'
 brew 's3cmd'
@@ -68,7 +68,6 @@ brew 'php'
 brew 'virtualenv'
 brew 'pipenv'
 brew 'pipx'
-brew 'poetry'
 brew 'yarn'
 brew 'mingw-w64' # Windows cross compilers
 brew 'k6'
@@ -93,9 +92,43 @@ brew 'benbjohnson/litestream/litestream' # Replica/backup de SQLite
 brew 'codecrafters-io/tap/codecrafters' # CLI de CodeCrafters
 brew 'stripe/stripe-cli/stripe' # CLI de Stripe
 
+# Desarrollo
+brew 'gh' # CLI de GitHub
+brew 'caddy' # Servidor web con HTTPS automatico
+brew 'cmake'
+brew 'ninja'
+brew 'ccache'
+brew 'golangci-lint'
+brew 'gox' # Compilacion cruzada de Go
+brew 'sqlc' # Genera Go tipado a partir de SQL
+brew 'swiftformat'
+brew 'carthage'
+brew 'minikube' # Kubernetes local
+brew 'openjdk'
+brew 'openjdk@21'
+brew 'exercism'
+brew 'rqlite' # SQLite distribuido
+brew 'unbound' # Resolver DNS
+brew 'srt' # Secure Reliable Transport (video)
+
+# Utilidades
+brew 'rclone'
+brew 'rsync'
+brew 'syncthing'
+brew 'sevenzip'
+brew 'unar'
+brew 'tesseract' # OCR
+brew 'vips' # Procesado de imagenes
+brew 'nnn' # Gestor de ficheros en terminal
+brew 'mackup' # Copia de ajustes de apps
+brew 'wrk' # Benchmark HTTP
+brew 'transmission-cli'
+brew 'bchunk' # .bin/.cue a .iso
+brew 'mcp-grafana' # Servidor MCP de Grafana
+
 # Applications
 cask 'google-chrome'
-cask 'handbrake'
+cask 'handbrake-app'
 cask 'slack'
 cask 'postico'
 cask 'postman'
@@ -121,7 +154,7 @@ cask 'maintenance'
 cask 'basecamp'
 cask 'mactex' # LaTeX for Mac
 cask 'visual-studio-code'
-cask 'logi-options-plus' # Logitech Mx Master (reemplaza a logitech-options, discontinuada)
+cask 'logi-options+' # Logitech Mx Master (reemplaza a logitech-options, discontinuada)
 cask 'balenaetcher' # Flash usb and SD Cards
 cask 'anaconda'
 cask 'poedit'
@@ -134,12 +167,9 @@ cask 'dotnet-sdk' # SDK .NET (el cask 'dotnet' quedo como stub vacio; el SDK inc
 cask 'iina'
 cask 'transmission'
 cask 'tunnelblick'
-cask 'appcleaner'
 cask 'http-toolkit' # (es cask, no formula)
 cask 'swiftbar' # Menubar plugins (homelab plugin)
 cask 'arc' # Navegador Arc
-cask 'cursor' # Editor con IA
-cask 'warp' # Terminal
 cask 'cloudflare-warp' # VPN/DNS de Cloudflare
 cask 'rescuetime' # Seguimiento de tiempo
 cask 'raspberry-pi-imager' # Grabar imagenes de Raspberry Pi
@@ -151,7 +181,7 @@ cask 'firefox' # Navegador Firefox
 cask 'zoom' # Videollamadas
 cask 'microsoft-teams' # Videollamadas/chat
 cask 'anydesk' # Escritorio remoto
-cask 'wireshark' # Analizador de red
+cask 'wireshark-app' # Analizador de red
 cask 'autofirma' # Firma electronica (Gobierno de Espana)
 cask 'remote-desktop-manager' # Gestor de conexiones remotas
 cask 'unity-hub' # Gestor de versiones de Unity
@@ -160,6 +190,7 @@ cask 'macdown' # Editor Markdown
 cask 'telegram' # Mensajeria
 cask 'ngrok' # Tuneles a localhost
 cask 'rustrover' # IDE Rust de JetBrains
+cask 'basecamp/tap/basecamp-cli' # CLI de Basecamp
 
 # Mac App Store Applications
 mas 'Xcode', id: 497799835
