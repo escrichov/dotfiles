@@ -93,6 +93,7 @@ brew 'codecrafters-io/tap/codecrafters' # CLI de CodeCrafters
 brew 'stripe/stripe-cli/stripe' # CLI de Stripe
 
 # Desarrollo
+cask 'orbstack' # Docker y maquinas Linux ligeras (sustituye a Docker Desktop); de pago para uso comercial
 brew 'gh' # CLI de GitHub
 brew 'caddy' # Servidor web con HTTPS automatico
 brew 'cmake'
