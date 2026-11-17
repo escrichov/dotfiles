@@ -235,6 +235,7 @@ function update() {
 	if [ -n "$_sudo_pid" ]; then
 		pkill -P "$_sudo_pid" 2>/dev/null
 		kill "$_sudo_pid" 2>/dev/null
+		wait "$_sudo_pid" 2>/dev/null
 	fi
 	unfunction _paso 2>/dev/null
 
